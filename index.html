@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
+<style>h
   html,body{margin:0;background:#e8e3f0;}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   ::selection{background:#7B5BFB;color:#fff;}
@@ -225,22 +225,18 @@ class Component extends DCLogic {
             desc:"Short hike up from Washington Square. Bay, bridge and skyline on a clear day. Free to walk the hill, $15 inside.",
             chips:[{k:"cost",t:"Free outside · $15 in"},{k:"hours",t:"Til 5 PM"}] }
         ]},
-        { k:"buf", mode:"🚶", dur:"6 min walk", to:"Grant Ave" },
-        { k:"act", time:"5:00 PM", a:{ id:"m-lipo", cat:"drink", emoji:"🏮", title:"Li Po Cocktail Lounge", hood:"Chinatown", addr:"916 Grant Ave", maps:A+"Li+Po+Cocktail+Lounge+916+Grant+Ave+San+Francisco", mand:true,
-          desc:"Legendary dive — get the Chinese Mai Tai, strong and sticky. Red-lantern glow, vintage everything. An SF rite of passage.", who:["k","m","d","p"],
-          chips:[{k:"good",t:"Kevin's pick"},{k:"hours",t:"Opens 2 PM"},{k:"cost",t:"≈ $14 / drink"}] } },
-        { k:"buf", mode:"🚗", dur:"22 min ride", to:"the Mission" },
-        { k:"cyoa", time:"7:00 PM", title:"Dinner — tonight only", opts:[
-          { cat:"eat", emoji:"🍢", name:"Rintaro", tagline:"Best izakaya", title:"Izakaya Rintaro", hood:"Mission", addr:"82 14th St", maps:A+"Rintaro+82+14th+St+San+Francisco", mand:false, who:["k","m","d","p"],
-            desc:"SF's best izakaya — handmade udon, yakitori over binchotan, gorgeous room. Get the mushroom yakitori, sashimi and udon.",
-            chips:[{k:"good",t:"Kevin's pick"},{k:"rez",t:"Resy · book this week"},{k:"warn",t:"Closed Tue & Sat"},{k:"cost",t:"≈ $55pp"}] },
-          { cat:"eat", emoji:"🍗", name:"San Tung", tagline:"Those wings", title:"San Tung", hood:"Inner Sunset", addr:"1031 Irving St", maps:A+"San+Tung+1031+Irving+St+San+Francisco", mand:false, who:["d","p"],
-            desc:"The dry-fried chicken wings are one of the best things in SF — sweet, sticky, impossible to stop. Add the dry black bean noodles.",
-            chips:[{k:"good",t:"Kevin's pick"},{k:"rez",t:"No rez · name on board"},{k:"warn",t:"Closed Tue & Wed"},{k:"cost",t:"≈ $25pp"}] },
-          { cat:"eat", emoji:"🍗", name:"Do Both", tagline:"Go all in", title:"San Tung + Rintaro", hood:"Sunset → Mission", addr:"Two-stop feast", maps:A+"San+Tung+1031+Irving+St+San+Francisco", mand:false, who:["k","m","d","p"],
-            desc:"Appetite's up? San Tung late lunch at 3–4 PM (wings + noodles, kept light), then Rintaro at 7. Both are Monday-only — might as well.",
-            chips:[{k:"warn",t:"Only works Mon"},{k:"cost",t:"≈ $70pp total"}] }
-        ]}
+        { k:"buf", mode:"🚗", dur:"25 min ride", to:"Inner Sunset" },
+        { k:"act", time:"4:00 PM", a:{ id:"m-santung", cat:"eat", emoji:"🍗", title:"San Tung", hood:"Inner Sunset", addr:"1031 Irving St", maps:A+"San+Tung+1031+Irving+St+San+Francisco", mand:true,
+          desc:"The dry-fried chicken wings are one of the best things in SF — sweet, sticky, impossible to stop. Add the dry black bean noodles. Go light — dinner's still ahead.", who:["k","m","d","p"],
+          chips:[{k:"good",t:"Kevin's pick"},{k:"rez",t:"No rez · name on board"},{k:"warn",t:"Closed Tue & Wed"},{k:"cost",t:"≈ $25pp"}] } },
+        { k:"buf", mode:"🚗", dur:"20 min ride", to:"the Mission" },
+        { k:"act", time:"7:00 PM", a:{ id:"m-rintaro", cat:"eat", emoji:"🍢", title:"Izakaya Rintaro", hood:"Mission", addr:"82 14th St", maps:A+"Rintaro+82+14th+St+San+Francisco", mand:true,
+          desc:"SF's best izakaya — handmade udon, yakitori over binchotan, gorgeous room. Get the mushroom yakitori, sashimi and udon.", who:["k","m","d","p"],
+          chips:[{k:"good",t:"Kevin's pick"},{k:"rez",t:"Resy · book this week"},{k:"warn",t:"Closed Tue & Sat"},{k:"cost",t:"≈ $55pp"}] } },
+        { k:"buf", mode:"🚗", dur:"18 min ride", to:"Chinatown" },
+        { k:"act", time:"10:30 PM", a:{ id:"m-lipo", cat:"drink", emoji:"🏮", title:"Li Po Cocktail Lounge", hood:"Chinatown", addr:"916 Grant Ave", maps:A+"Li+Po+Cocktail+Lounge+916+Grant+Ave+San+Francisco", mand:true,
+          desc:"Legendary dive — get the Chinese Mai Tai, strong and sticky. Red-lantern glow, vintage everything. The perfect way to close out day one.", who:["k","m","d","p"],
+          chips:[{k:"good",t:"Kevin's pick"},{k:"hours",t:"Open late"},{k:"cost",t:"≈ $14 / drink"}] } }
       ]},
       tue:{ title:"Tuesday", sub:"Main character day · Jun 30", tl:[
         { k:"cyoa", time:"10:00 AM", title:"Slow morning", opts:[
