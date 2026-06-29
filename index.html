@@ -136,29 +136,38 @@
       </sc-if>
     </sc-if>
 
-    <sc-if value="{{ isInfo }}">
+    <sc-if value="{{ isTips }}">
       <div style="margin:2px 2px 18px;">
-        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em;color:#1A1714;">Trip Info</div>
-        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:13px;color:#9A52F2;margin-top:2px;">Logistics, money & backups</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em;color:#1A1714;">Trip Tips</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:13px;color:#9A52F2;margin-top:2px;">Good to know before you go</div>
       </div>
-
-      <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9A9082;margin:6px 2px 12px;">Need to know</div>
-      <sc-for list="{{ logistics }}" as="lg" hint-placeholder-count="5">
-        <div style="display:flex;gap:13px;align-items:flex-start;background:#fff;border:1px solid #ECE4D9;border-radius:16px;padding:13px 14px;margin-bottom:9px;box-shadow:0 6px 18px -15px rgba(26,23,20,.3);">
-          <div style="font-size:19px;width:34px;height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:{{ lg.tint }};border-radius:11px;">{{ lg.icon }}</div>
-          <div style="flex:1;">
-            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14.5px;color:#1A1714;">{{ lg.title }}</div>
-            <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:13px;line-height:1.5;color:#5C5447;margin-top:3px;">{{ lg.text }}</div>
+      <sc-for list="{{ logistics }}" as="tip">
+        <div style="background:#FFFDF8;border:1.5px solid #EFE6D6;border-radius:18px;padding:14px 16px;margin-bottom:12px;box-shadow:0 4px 14px -10px rgba(26,23,20,.2);">
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="font-size:22px;line-height:1;min-width:28px;margin-top:2px;">{{ tip.icon }}</div>
+            <div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;color:#1A1714;margin-bottom:4px;">{{ tip.title }}</div>
+              <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:13px;line-height:1.5;color:#5A5247;">{{ tip.text }}</div>
+            </div>
           </div>
         </div>
       </sc-for>
-
-      <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9A9082;margin:26px 2px 12px;">Bonus picks</div>
-      <sc-for list="{{ bonus }}" as="bc" hint-placeholder-count="4">
-        <div style="background:#fff;border:1px solid #ECE4D9;border-radius:16px;padding:14px 16px;margin-bottom:9px;box-shadow:0 6px 18px -15px rgba(26,23,20,.3);">
-          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:14px;color:{{ bc.color }};margin-bottom:9px;">{{ bc.title }}</div>
-          <sc-for list="{{ bc.items }}" as="it">
-            <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:13px;line-height:1.45;color:#6B6258;padding:7px 0;border-top:1px solid #F3ECE0;"><strong style="color:#1A1714;font-weight:700;">{{ it.name }}</strong> {{ it.text }}</div>
+    </sc-if>
+    <sc-if value="{{ isBonus }}">
+      <div style="margin:2px 2px 18px;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em;color:#1A1714;">Bonus Picks</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:13px;color:#9A52F2;margin-top:2px;">More great places to consider</div>
+      </div>
+      <sc-for list="{{ bonus }}" as="section">
+        <div style="margin-bottom:20px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:14px;letter-spacing:.02em;color:{{ section.color }};background:{{ section.color }}18;padding:5px 12px;border-radius:999px;">{{ section.title }}</div>
+          </div>
+          <sc-for list="{{ section.items }}" as="item">
+            <div style="background:#FFFDF8;border:1.5px solid #EFE6D6;border-radius:14px;padding:11px 14px;margin-bottom:8px;">
+              <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14px;color:#1A1714;">{{ item.name }}</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:13px;color:#5A5247;">{{ item.text }}</span>
+            </div>
           </sc-for>
         </div>
       </sc-for>
@@ -287,36 +296,64 @@ class Component extends DCLogic {
           desc:"Flight departs 8:55 PM. Wednesday traffic on 101 gets rough — leave by 6 PM at the absolute latest. Rideshare is easiest from the Richmond.", who:["k","m","d","p"],
           chips:[{k:"warn",t:"⏰ Leave by 6 PM sharp"},{k:"cost",t:"≈ $55 · split 4"}] } }
       ]},
-      info:{ title:"Trip Info", tips:true,
+      tips:{ id:"tips", title:"Trip Tips", tips:true,
         logistics:[
-          { icon:"📞", tint:"#7B5BFB18", title:"Book these now", text:"Original Joe's (weeks out — do it today). Rintaro on Resy this week. Swan & San Tung take no rez — just line up." },
+          { icon:"📋", tint:"#7B5BFB18", title:"Book these now", text:"Original Joe's (weeks out — do it today). Rintaro on Resy this week. Swan & San Tung take no rez — just line up." },
           { icon:"💵", tint:"#58B94818", title:"Bring cash", text:"Swan Oyster Depot (cash only). Li Po strongly prefers cash. Settle group splits in the chat — venmo nightly so it doesn't pile up." },
           { icon:"🚗", tint:"#FF9F1C1C", title:"Getting around", text:"Uber/Lyft everywhere. Don't rent a car — parking is miserable and stops are spread across neighborhoods." },
           { icon:"🧥", tint:"#07B4A618", title:"Layers, always", text:"Late June is Karl the Fog season — cold and grey by 5 PM even if noon was warm. Everyone packs a jacket." },
           { icon:"🏨", tint:"#FF5A3C18", title:"Hotel Spero area", text:"Tenderloin/Union Square border. Walk toward Union Square (down Stockton). Avoid wandering west on Taylor late. Hotel itself is fine." }
-        ],
+        ]
+      },
+      bonus:{ id:"bonus", title:"Bonus Picks", tips:true,
+        logistics:[],
         bonus:[
-          { title:"🍽️ More food", color:"#FF5A3C", items:[
+          { title:"🍸 Martini Musts", color:"#3F8DFB", items:[
+            { name:"Blackbird", text:"— Arguably the best martini in SF. Perfect ratio, ice-cold, Church St." },
+            { name:"Trick Dog", text:"— Creative cocktail bar; their version is a stunner. Mission." },
+            { name:"Che Fico Alimentari", text:"— House martini with olive oil-washed vodka. Stunning." },
+            { name:"Perbacco", text:"— Serious Italian restaurant bar, proper classic martini." },
+            { name:"Wayfare Tavern", text:"— Tyler Florence's spot. Dirty martini is a must-order." },
+            { name:"Benjamin Cooper", text:"— Hayes Valley. Elegant bar, exceptional dirty martini." },
+            { name:"Tosca Cafe", text:"— North Beach icon, old Hollywood vibes, great bar program." },
+            { name:"The Bon Vivants", text:"— Award-winning cocktail lounge. Rotating martini riff." }
+          ]},
+          { title:"🍽️ More Food", color:"#FF5A3C", items:[
             { name:"Zuni Café", text:"— Brick-oven roast chicken for two. SF classic." },
-            { name:"Dumpling Home", text:"— XLB that rival Shanghai. Book ahead." },
-            { name:"Z&Y", text:"— Best Sichuan in Chinatown." },
-            { name:"Nopa", text:"— Late kitchen til 1 AM. Great after OJ's." }
+            { name:"Dumpling Home", text:"— XLB that rival Shanghai. Book ahead on Tock." },
+            { name:"Z&Y", text:"— Best Sichuan in Chinatown. Fiery and incredible." },
+            { name:"Nopa", text:"— Late kitchen til 1 AM. Great after OJ's." },
+            { name:"La Ciccia", text:"— Sardinian gem in Noe Valley. Handmade pasta, BYOB Tues." },
+            { name:"Bix", text:"— Supper club energy, gorgeous room, excellent cocktails." },
+            { name:"Tartine Manufactory", text:"— Beyond the bakery; lunch bowls, croque, killer coffee." },
+            { name:"Burma Superstar", text:"— Richmond. Tea leaf salad is life-changing." },
+            { name:"PPQ Dungeness Island", text:"— Cracked crab + garlic noodles. Inner Richmond must." },
+            { name:"Cotogna", text:"— Wood-fired Italian. Jack Falstaff's casual gem." }
           ]},
-          { title:"🍸 More bars", color:"#7B5BFB", items:[
-            { name:"Trick Dog", text:"— Top craft cocktail bar in the country." },
-            { name:"Smuggler's Cove", text:"— 500+ rums, full tiki." },
+          { title:"🍸 More Bars", color:"#7B5BFB", items:[
+            { name:"Trick Dog", text:"— Top craft cocktail bar in the country. Mission." },
+            { name:"Smuggler's Cove", text:"— 500+ rums. Full tiki. Incredible." },
             { name:"Zeitgeist", text:"— Massive beer garden, cash, great energy." },
-            { name:"The Alembic", text:"— Haight, whiskey-forward." }
+            { name:"The Alembic", text:"— Haight. Whiskey-forward, excellent bartenders." },
+            { name:"True Laurel", text:"— Michelin bar, vegetable-forward cocktails, Mission." },
+            { name:"Horsefeather", text:"— Richmond. Low-key vibe, exceptional drinks." },
+            { name:"Bar Agricole", text:"— SoMa. Farm-to-glass philosophy, stunning space." },
+            { name:"Whitechapel", text:"— Gin palace underneath the Tenderloin. 700+ gins." }
           ]},
-          { title:"🌁 If time", color:"#07B4A6", items:[
-            { name:"Lands End", text:"— Coastal hike + Sutro Baths ruins." },
-            { name:"Clarion Alley", text:"— Best open-air mural gallery." },
-            { name:"Golden Gate Bridge", text:"— Walk it; Marin Headlands for the view." }
+          { title:"👀 If Time Allows", color:"#07B4A6", items:[
+            { name:"Lands End", text:"— Coastal hike + Sutro Baths ruins. 90 min, gorgeous." },
+            { name:"Clarion Alley", text:"— Best open-air mural gallery in the city." },
+            { name:"Golden Gate Bridge", text:"— Walk it. Marin Headlands for the iconic view." },
+            { name:"Salesforce Park", text:"— Rooftop park above the Transbay Terminal. Underrated." },
+            { name:"Dog Patch", text:"— Up-and-coming waterfront neighborhood worth a wander." },
+            { name:"Ferry Building", text:"— Sat market or just the oyster bar + Blue Bottle." }
           ]},
           { title:"🗺️ Neighborhoods", color:"#FF9F1C", items:[
-            { name:"North Beach", text:"— Italian, old SF, Molinari, OJ's." },
-            { name:"Mission", text:"— Stonemill, Rintaro, Tartine, Dolores." },
-            { name:"Richmond", text:"— PPQ, Burma, less touristy." }
+            { name:"North Beach", text:"— Italian, old SF energy, Molinari, OJ's, City Lights." },
+            { name:"Mission", text:"— Stonemill, Rintaro, Tartine, Dolores Park." },
+            { name:"Richmond", text:"— PPQ, Burma, Horsefeather. Less touristy, great food." },
+            { name:"Hayes Valley", text:"— Boutique shops, great bars, Benjamin Cooper." },
+            { name:"Noe Valley", text:"— Quiet, residential charm, La Ciccia on a slow night." }
           ]}
         ]
       }
@@ -372,14 +409,15 @@ class Component extends DCLogic {
     const s=this.state, props=this.props||{}, data=this.data(), cats=this.cats(), crew=this.crewData();
     const dayId = s.day || props.startDay || "mon";
     const cur = data[dayId] || data.mon;
-    const isInfo = !!cur.tips;
+    const isTips = cur.id==="tips";
+    const isBonus = cur.id==="bonus";
 
     const crewChips = Object.keys(crew).map((key,idx)=>{
       const cr=crew[key];
       return { i:cr.n[0], heroStyle:"width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:13px;color:#fff;border:2px solid rgba(255,255,255,.85);background:"+cr.c+";box-shadow:0 2px 6px rgba(0,0,0,.2);"+(idx?"margin-left:-9px;":"") };
     });
 
-    const tabDef=[["mon","Mon","6/29"],["tue","Tue","6/30"],["wed","Wed","7/1"],["info","Info","tips"]];
+    const tabDef=[["mon","Mon","6/29"],["tue","Tue","6/30"],["wed","Wed","7/1"],["tips","Tips","tips"],["bonus","Bonus","picks"]];
     const tabBase="flex:1;text-align:center;padding:9px 4px 9px;border-radius:13px 13px 0 0;cursor:pointer;border:none;border-bottom:3px solid transparent;background:none;transition:all .15s;";
     const dayTabs=tabDef.map(t=>{
       const active=t[0]===dayId;
@@ -401,7 +439,7 @@ class Component extends DCLogic {
     Object.keys(s.fav).forEach(k=>{ if(s.fav[k]) favCount++; });
     Object.keys(s.rem).forEach(k=>{ if(s.rem[k]) remCount++; });
 
-    if(!isInfo){
+    if(!isTips&&!isBonus){
       const flt=s.filter;
       cur.tl.forEach((item,i)=>{
         const key=dayId+"-"+i;
@@ -436,10 +474,10 @@ class Component extends DCLogic {
     return {
       crew:crewChips, favCount, remCount,
       dayTabs, filters,
-      isDay:!isInfo, isInfo,
+      isDay:!isTips&&!isBonus, isTips, isBonus,
       dayTitle:cur.title, daySub:cur.sub||"",
-      rows, hasRows:rows.length>0, noRows: !isInfo && rows.length===0,
-      logistics:cur.logistics||[], bonus:cur.bonus||[]
+      rows, hasRows:rows.length>0, noRows: !isTips && !isBonus && rows.length===0,
+      logistics:cur.logistics||[], bonus:cur.bonus||[], isBonus
     };
   }
 }
