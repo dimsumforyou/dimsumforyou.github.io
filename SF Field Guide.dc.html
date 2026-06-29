@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;background:#0c0a08;}
+  ::selection{background:#EA4E2C;color:#0c0a08;}
+  *{box-sizing:border-box;}
+</style>
+</helmet>
+
+<div style="position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.045;mix-blend-mode:soft-light;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);"></div>
+
+<div style="min-height:100vh;background:#0c0a08;font-family:'Newsreader',Georgia,serif;color:#F3E9D7;">
+<div style="max-width:940px;margin:0 auto;border-left:1px solid #211d19;border-right:1px solid #211d19;background:linear-gradient(180deg,#100d0a,#0c0a08 420px);">
+
+  <header style="position:relative;overflow:hidden;padding:clamp(40px,6vw,64px) clamp(20px,5vw,48px) clamp(34px,4vw,46px);border-bottom:1px solid #211d19;">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 72% 90% at 80% 26%,rgba(234,78,44,.18),transparent 62%);pointer-events:none;"></div>
+    <div style="position:absolute;right:-6px;bottom:-46px;font-family:'Newsreader',serif;font-weight:600;font-size:clamp(140px,26vw,240px);line-height:.74;color:rgba(234,78,44,.07);pointer-events:none;user-select:none;letter-spacing:-.04em;">三藩市</div>
+    <div style="position:absolute;top:clamp(40px,6vw,64px);right:clamp(18px,3vw,30px);writing-mode:vertical-rl;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#5c544b;">Eat · Drink · Walk</div>
+    <div style="position:relative;">
+      <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#EA4E2C;margin-bottom:22px;display:flex;align-items:center;gap:11px;flex-wrap:wrap;">
+        <span>Field Guide</span>
+        <span style="width:26px;height:1px;background:#EA4E2C;display:inline-block;"></span>
+        <span style="color:#8a8073;">三日 · 72 Hours</span>
+      </div>
+      <h1 style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(60px,13vw,138px);line-height:.82;letter-spacing:.005em;text-transform:uppercase;margin:0;color:#F3E9D7;">San<br><span style="color:#EA4E2C;">Francisco</span></h1>
+      <div style="margin-top:30px;display:flex;flex-wrap:wrap;gap:9px;">
+        <div style="display:flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.03em;color:#b8ab99;border:1px solid #2a2521;background:#121009;border-radius:2px;padding:7px 13px;"><span style="width:6px;height:6px;background:#EA4E2C;border-radius:50%;"></span>Arrive Mon Jun 29 · 11:20 AM</div>
+        <div style="display:flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.03em;color:#b8ab99;border:1px solid #2a2521;background:#121009;border-radius:2px;padding:7px 13px;"><span style="width:6px;height:6px;background:#EA4E2C;border-radius:50%;"></span>Depart Wed Jul 1 · 8:55 PM</div>
+        <div style="display:flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.03em;color:#b8ab99;border:1px solid #2a2521;background:#121009;border-radius:2px;padding:7px 13px;"><span style="width:6px;height:6px;background:#E0A93B;border-radius:50%;"></span>Hotel Spero · 405 Taylor St</div>
+      </div>
+    </div>
+  </header>
+
+  <div style="display:flex;gap:14px;align-items:flex-start;padding:16px clamp(20px,5vw,48px);background:rgba(217,138,51,.06);border-bottom:1px solid rgba(217,138,51,.16);">
+    <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#E2A93B;border:1px solid rgba(226,169,59,.4);border-radius:2px;padding:4px 8px;white-space:nowrap;flex-shrink:0;margin-top:2px;">⚠ Hours</div>
+    <div style="font-family:'Newsreader',serif;font-size:14px;line-height:1.55;color:#c9a96a;">
+      <strong style="color:#E2A93B;font-weight:600;">Rintaro</strong> closed Tue &amp; Sat — Monday dinner only. <span style="opacity:.4;">·</span> <strong style="color:#E2A93B;font-weight:600;">San Tung</strong> closed Tue &amp; Wed — Monday only. <span style="opacity:.4;">·</span> <strong style="color:#E2A93B;font-weight:600;">PPQ</strong> closed Mon &amp; Tue — Wednesday dinner lines up perfectly before your flight.
+    </div>
+  </div>
+
+  <nav style="position:sticky;top:0;z-index:50;display:flex;overflow-x:auto;background:rgba(12,10,8,.93);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #211d19;padding:0 clamp(14px,4vw,40px);">
+    <sc-for list="{{ nav }}" as="d" hint-placeholder-count="4">
+      <button onClick="{{ d.onSelect }}" style="{{ d.btnStyle }}"><span style="{{ d.idxStyle }}">{{ d.idx }}</span>{{ d.navLabel }}</button>
+    </sc-for>
+  </nav>
+
+  <main style="padding:0 clamp(20px,5vw,48px) 56px;">
+
+    <div style="position:relative;padding:clamp(36px,5vw,48px) 0 26px;border-bottom:1px solid #211d19;margin-bottom:14px;">
+      <div style="position:absolute;top:clamp(24px,4vw,34px);right:0;font-family:'Anton',sans-serif;font-size:clamp(90px,16vw,138px);line-height:1;color:transparent;-webkit-text-stroke:1px #2a241d;pointer-events:none;user-select:none;">{{ dayIndex }}</div>
+      <div style="position:relative;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#EA4E2C;margin-bottom:12px;">{{ dayKicker }}</div>
+      <div style="position:relative;font-family:'Anton',sans-serif;font-size:clamp(34px,6.5vw,58px);line-height:.9;text-transform:uppercase;letter-spacing:.01em;color:#F3E9D7;">{{ dayTitle }}</div>
+    </div>
+
+    <sc-if value="{{ isDay }}" hint-placeholder-val="{{ true }}">
+      <sc-for list="{{ slots }}" as="slot" hint-placeholder-count="4">
+        <div style="border-bottom:1px solid #1c1814;">
+          <div onClick="{{ slot.onToggle }}" style="display:flex;align-items:center;gap:clamp(12px,3vw,18px);padding:18px 4px;cursor:pointer;" style-hover="background:#100e0b;">
+            <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.04em;color:#EA4E2C;min-width:76px;">{{ slot.time }}</div>
+            <div style="flex:1;font-family:'Anton',sans-serif;font-size:clamp(16px,3.6vw,20px);letter-spacing:.045em;text-transform:uppercase;color:#F3E9D7;">{{ slot.label }}</div>
+            <div style="font-family:'Space Mono',monospace;font-size:11px;color:#6b6258;transition:transform .28s ease;transform:{{ slot.arrow }};">▼</div>
+          </div>
+          <div style="display:grid;transition:grid-template-rows .34s cubic-bezier(.4,0,.2,1);grid-template-rows:{{ slot.rows }};">
+            <div style="overflow:hidden;min-height:0;">
+              <div style="padding:2px 4px 24px;">
+                <sc-if value="{{ slot.multi }}">
+                  <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px;">
+                    <sc-for list="{{ slot.tabs }}" as="tb">
+                      <button onClick="{{ tb.onSelect }}" style="{{ tb.style }}">{{ tb.label }}</button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <div style="{{ slot.card.frameStyle }}">
+                  <div style="display:flex;gap:16px;align-items:flex-start;">
+                    <div style="font-size:30px;line-height:1;flex-shrink:0;">{{ slot.card.emoji }}</div>
+                    <div style="flex:1;min-width:0;">
+                      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px;">
+                        <sc-if value="{{ slot.card.hasLink }}">
+                          <a href="{{ slot.card.href }}" target="_blank" style="font-family:'Newsreader',serif;font-weight:600;font-size:20px;line-height:1.15;color:#F3E9D7;display:inline-flex;align-items:center;gap:6px;" style-hover="color:#EA4E2C;">{{ slot.card.name }}<span style="font-size:13px;opacity:.5;">↗</span></a>
+                        </sc-if>
+                        <sc-if value="{{ slot.card.noLink }}">
+                          <span style="font-family:'Newsreader',serif;font-weight:600;font-size:20px;line-height:1.15;color:#F3E9D7;">{{ slot.card.name }}</span>
+                        </sc-if>
+                        <sc-if value="{{ slot.card.hasBadge }}">
+                          <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#E0A93B;border:1px solid rgba(224,169,59,.4);border-radius:2px;padding:2px 7px;">⬛ {{ slot.card.badge }}</span>
+                        </sc-if>
+                      </div>
+                      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8a8073;margin-bottom:12px;">{{ slot.card.hood }}</div>
+                      <div style="font-family:'Newsreader',serif;font-size:15px;line-height:1.62;color:#c2b6a6;margin-bottom:15px;">{{ slot.card.desc }}</div>
+                      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+                        <sc-for list="{{ slot.card.tags }}" as="tg">
+                          <span style="{{ tg.style }}">{{ tg.t }}</span>
+                        </sc-for>
+                      </div>
+                      <sc-if value="{{ slot.card.hasMaps }}">
+                        <a href="{{ slot.card.maps }}" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:15px;padding:8px 14px;background:#181511;border:1px solid #2a2521;border-radius:2px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.05em;color:#9a8f80;" style-hover="border-color:#EA4E2C;color:#F3E9D7;background:rgba(234,78,44,.07);">📍 Open in Maps</a>
+                      </sc-if>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{ isTips }}">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#EA4E2C;margin:44px 0 18px;padding-bottom:12px;border-bottom:1px solid #211d19;">Logistics</div>
+      <sc-for list="{{ logistics }}" as="lg" hint-placeholder-count="5">
+        <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid #1c1814;">
+          <div style="font-size:18px;width:26px;text-align:center;flex-shrink:0;">{{ lg.icon }}</div>
+          <div style="flex:1;">
+            <div style="font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.045em;text-transform:uppercase;color:#F3E9D7;margin-bottom:5px;">{{ lg.title }}</div>
+            <div style="font-family:'Newsreader',serif;font-size:14px;line-height:1.55;color:#9a8f80;">{{ lg.text }}</div>
+          </div>
+        </div>
+      </sc-for>
+
+      <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#EA4E2C;margin:48px 0 18px;padding-bottom:12px;border-bottom:1px solid #211d19;">Bonus Picks</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;">
+        <sc-for list="{{ bonus }}" as="bc" hint-placeholder-count="4">
+          <div style="background:#141210;border:1px solid #2a2521;border-radius:3px;padding:20px 22px;">
+            <div style="font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.045em;text-transform:uppercase;color:#EA4E2C;margin-bottom:14px;">{{ bc.title }}</div>
+            <div style="display:flex;flex-direction:column;">
+              <sc-for list="{{ bc.items }}" as="it">
+                <div style="font-family:'Newsreader',serif;font-size:13.5px;line-height:1.5;color:#9a8f80;padding:8px 0;border-bottom:1px solid #1c1814;"><strong style="color:#F3E9D7;font-weight:600;">{{ it.name }}</strong> {{ it.text }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+  </main>
+
+  <footer style="text-align:center;padding:40px clamp(20px,5vw,48px) 30px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4a433b;border-top:1px solid #1c1814;">SF · Jun 29 – Jul 1, 2026 · 三藩市</footer>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;expandAll&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;},&quot;startDay&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mon&quot;,&quot;tue&quot;,&quot;wed&quot;,&quot;tips&quot;],&quot;default&quot;:&quot;mon&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = { activeDay: null, open: {}, opt: {} };
+  }
+
+  data() {
+    return {
+      days: [
+        { id:"mon", nav:"Mon 6/29", idx:"01", type:"day", kicker:"Day 01 — Arrival", title:"Monday, June 29",
+          slots:[
+            { time:"11:20 AM", label:"Arrive & Get In", open:true, options:[
+              { emoji:"✈️", name:"SFO → Hotel Spero", badge:"Locked", locked:true, hood:"Union Square / Tenderloin",
+                desc:"~35–40 min rideshare. Drop bags — room may not be ready until 3PM, ask to store luggage. Walk down Stockton to Union Square to orient.",
+                tags:[["405 Taylor St","locked"]], maps:"https://maps.google.com/?q=Hotel+Spero+405+Taylor+St+San+Francisco" }
+            ]},
+            { time:"1:00 PM", label:"Lunch", options:[
+              { tab:"Option A", emoji:"🥩", name:"Molinari Deli", href:"https://maps.google.com/?q=Molinari+Delicatessen+373+Columbus+Ave+San+Francisco", hood:"North Beach · 373 Columbus Ave",
+                desc:"North Beach institution. Grab a number the second you walk in — there will be a line. Porchetta on Dutch roll or the Lucca Special are the move. Eat in Washington Square Park across the street. Perfect first stop in the city.",
+                tags:[["Kevin's Pick","pick"],["Open until 5:30PM","def"]], maps:"https://maps.google.com/?q=Molinari+Delicatessen+373+Columbus+Ave+San+Francisco" },
+              { tab:"Option B", emoji:"🦞", name:"Swan Oyster Depot", href:"https://maps.google.com/?q=Swan+Oyster+Depot+1517+Polk+St+San+Francisco", hood:"Nob Hill · 1517 Polk St",
+                desc:"Counter-only raw bar. Chowder, crab louie, fresh oysters, cold beer. Cash only. Lines move fast but start early. Only works if you're off the plane and moving quickly — closes at 3PM.",
+                tags:[["Cash Only","warn"],["Closes 3PM","warn"]], maps:"https://maps.google.com/?q=Swan+Oyster+Depot+1517+Polk+St+San+Francisco" }
+            ]},
+            { time:"2:30 PM", label:"Afternoon", options:[
+              { tab:"Option A", emoji:"🚶", name:"North Beach → Chinatown Walk", hood:"North Beach to Chinatown",
+                desc:"Walk Columbus Ave south from Molinari into Chinatown. Hit Golden Gate Bakery for egg tarts if the line isn't an hour long. Ends naturally near Li Po — perfect setup for pre-dinner drinks.",
+                tags:[["Walking · ~45 min","def"],["Free","def"]], maps:"https://maps.google.com/?q=Chinatown+San+Francisco" },
+              { tab:"Option B", emoji:"🌁", name:"Coit Tower", href:"https://maps.google.com/?q=Coit+Tower+San+Francisco", hood:"North Beach · Telegraph Hill",
+                desc:"Short hike up from Washington Square Park. Great views of the city, bay, and Bay Bridge on a clear day. Free to walk up the hill, $15 to go inside. Good first-day orientation moment after lunch.",
+                tags:[["Views","def"],["Free (exterior)","def"]], maps:"https://maps.google.com/?q=Coit+Tower+San+Francisco" }
+            ]},
+            { time:"5:00 PM", label:"Pre-Dinner Drinks", options:[
+              { emoji:"🏮", name:"Li Po Cocktail Lounge", href:"https://maps.google.com/?q=Li+Po+Cocktail+Lounge+916+Grant+Ave+San+Francisco", hood:"Chinatown · 916 Grant Ave",
+                desc:"Legendary dive in Chinatown. Get the Chinese Mai Tai — strong, sticky, non-negotiable. Moody red lighting, vintage everything, cash-heavy vibe. An SF rite of passage. Opens 2PM.",
+                tags:[["Kevin's Pick","pick"],["Opens 2PM","def"]], maps:"https://maps.google.com/?q=Li+Po+Cocktail+Lounge+916+Grant+Ave+San+Francisco" }
+            ]},
+            { time:"7:00 PM", label:"Dinner — Tonight Only", options:[
+              { tab:"Rintaro", emoji:"🍢", name:"Izakaya Rintaro", href:"https://maps.google.com/?q=Rintaro+82+14th+St+San+Francisco", hood:"Mission · 82 14th St",
+                desc:"SF's best izakaya. Handmade udon, yakitori over binchotan, beautiful tatami-adjacent interior. Get the mushroom yakitori, the sashimi, and the udon. Reserve on Resy — walk-ins are tough.",
+                tags:[["Kevin's Pick","pick"],["Closed Tue & Sat — tonight only","warn"],["5PM–10PM","def"]], maps:"https://maps.google.com/?q=Rintaro+82+14th+St+San+Francisco" },
+              { tab:"San Tung", emoji:"🍗", name:"San Tung", href:"https://maps.google.com/?q=San+Tung+1031+Irving+St+San+Francisco", hood:"Inner Sunset · 1031 Irving St",
+                desc:"The dry-fried chicken wings are genuinely one of the best things in SF — sweet, sticky, impossible to stop eating. Also get the dry black bean noodles. No rez, write your name on the board.",
+                tags:[["Kevin's Pick","pick"],["Closed Tue & Wed — tonight only","warn"],["Open until 8:30PM","def"]], maps:"https://maps.google.com/?q=San+Tung+1031+Irving+St+San+Francisco" },
+              { tab:"Both", emoji:"🍗+🍢", name:"Do Both", hood:"Inner Sunset → Mission",
+                desc:"If the group's appetite is up for it: San Tung for a late lunch around 3–4PM (wings + noodles, keeps it light), then Rintaro for dinner at 7PM. Both are only available Monday — might as well go all in.",
+                tags:[["Late lunch + dinner","def"],["Only works Mon","warn"]] }
+            ]}
+          ]
+        },
+        { id:"tue", nav:"Tue 6/30", idx:"02", type:"day", kicker:"Day 02 — Full Day", title:"Tuesday, June 30",
+          slots:[
+            { time:"10:00 AM", label:"Morning", options:[
+              { tab:"Option A", emoji:"🍵", name:"Stonemill Matcha", href:"https://maps.google.com/?q=Stonemill+Matcha+561+Valencia+St+San+Francisco", hood:"Mission · 561 Valencia St",
+                desc:"Vibe first, food second — but both are legit. Tamago sando and Japanese breakfast are great. Stone-ground matcha lattes, not sweet by default, cleanest in the city. Calm morning spot before the day kicks in.",
+                tags:[["Kevin's Pick","pick"],["Opens 10AM weekdays","def"]], maps:"https://maps.google.com/?q=Stonemill+Matcha+561+Valencia+St+San+Francisco" },
+              { tab:"Option B", emoji:"☕", name:"Sightglass Coffee", href:"https://maps.google.com/?q=Sightglass+Coffee+270+7th+St+San+Francisco", hood:"SoMa · 270 7th St",
+                desc:"Big, airy industrial space a few blocks from the hotel. Good beans, good food, easy for the group to linger without committing to a Uber to the Mission first thing.",
+                tags:[["Opens 7AM","def"],["Close to hotel","def"]], maps:"https://maps.google.com/?q=Sightglass+Coffee+270+7th+St+San+Francisco" }
+            ]},
+            { time:"12:00 PM", label:"Afternoon Activity", options:[
+              { tab:"SFMOMA", emoji:"🎨", name:"SFMOMA", href:"https://maps.google.com/?q=SFMOMA+151+3rd+St+San+Francisco", hood:"SoMa · 151 3rd St",
+                desc:"World-class modern and contemporary art museum. 5 floors, always rotating shows. Good for 2–3 hours of wandering. Close to the hotel in SoMa.",
+                tags:[["10AM–5PM","def"],["~$30 entry","def"]], maps:"https://maps.google.com/?q=SFMOMA+151+3rd+St+San+Francisco" },
+              { tab:"Dolores Park", emoji:"🌿", name:"Dolores Park", href:"https://maps.google.com/?q=Dolores+Park+San+Francisco", hood:"Mission · 18th & Dolores",
+                desc:"The social heartbeat of SF on a nice day. Vendors, city views, great people-watching. Zero commitment. Pairs perfectly after Stonemill — both are on Valencia.",
+                tags:[["Free","def"],["Mission","def"]], maps:"https://maps.google.com/?q=Dolores+Park+San+Francisco" },
+              { tab:"Castro", emoji:"🚋", name:"Castro + Twin Peaks", href:"https://maps.google.com/?q=Twin+Peaks+San+Francisco", hood:"Castro → Twin Peaks",
+                desc:"Walk the Castro, grab a drink at Twin Peaks Tavern (oldest glass-front gay bar in the US — a genuine landmark), then Uber up to Twin Peaks summit for a full panoramic view of the city. Underrated afternoon.",
+                tags:[["Views","def"],["Walkable","def"]], maps:"https://maps.google.com/?q=Twin+Peaks+San+Francisco" }
+            ]},
+            { time:"6:30 PM", label:"Dinner with Parents", open:true, options:[
+              { emoji:"🍝", name:"Original Joe's", href:"https://maps.google.com/?q=Original+Joe%27s+601+Union+St+San+Francisco", badge:"Locked", locked:true, hood:"North Beach · 601 Union St",
+                desc:"Classic Italian-American institution in North Beach. Red booths, dark wood, the whole atmosphere. Veal piccata and rack of lamb are the standouts. Great for parents — comfortable, classic, no surprises.",
+                tags:[["Opens 4PM Tue","locked"],["Book now — fills weeks out","warn"]], maps:"https://maps.google.com/?q=Original+Joe%27s+601+Union+St+San+Francisco" }
+            ]}
+          ]
+        },
+        { id:"wed", nav:"Wed 7/1", idx:"03", type:"day", kicker:"Day 03 — Departure", title:"Wednesday, July 1",
+          slots:[
+            { time:"Morning", label:"Loose Morning", options:[
+              { tab:"Option A", emoji:"🥐", name:"Tartine Bakery", href:"https://maps.google.com/?q=Tartine+Bakery+600+Guerrero+St+San+Francisco", hood:"Mission · 600 Guerrero St",
+                desc:"Best bread in SF. Country loaf, morning bun, croque monsieur. Go early or around 5PM when the afternoon batch drops — it sells out. On the way to/from the Mission.",
+                tags:[["Mission","def"]], maps:"https://maps.google.com/?q=Tartine+Bakery+600+Guerrero+St+San+Francisco" },
+              { tab:"Option B", emoji:"🏛️", name:"Ferry Building", href:"https://maps.google.com/?q=Ferry+Building+San+Francisco", hood:"Embarcadero · 1 Ferry Building",
+                desc:"Great food stalls any day — Acme Bread, Cowgirl Creamery, Blue Bottle. Nice walk along the Embarcadero. Easy way to spend a last morning without committing to much.",
+                tags:[["Embarcadero","def"]], maps:"https://maps.google.com/?q=Ferry+Building+Marketplace+San+Francisco" }
+            ]},
+            { time:"4:00 PM", label:"Early Dinner Before Flight", open:true, options:[
+              { tab:"PPQ", emoji:"🦀", name:"PPQ Dungeness Island", href:"https://maps.google.com/?q=PPQ+Dungeness+Island+5821+Geary+Blvd+San+Francisco", hood:"Richmond · 5821 Geary Blvd",
+                desc:"Closed Mon & Tue but opens at 4PM Wednesday — lines up perfectly for an early send-off dinner. Garlic butter crab and garlic noodles are the move. Messy, worth it. Leave by 6PM for the airport.",
+                tags:[["Kevin's Pick","pick"],["✓ Wed works — opens 4PM","good"],["Leave by 6PM","warn"]], maps:"https://maps.google.com/?q=PPQ+Dungeness+Island+5821+Geary+Blvd+San+Francisco" },
+              { tab:"Burma Superstar", emoji:"🍜", name:"Burma Superstar", href:"https://maps.google.com/?q=Burma+Superstar+309+Clement+St+San+Francisco", hood:"Richmond · 309 Clement St",
+                desc:"Incredible tea leaf salad, rainbow salad, coconut noodles. Also in the Richmond, close to PPQ. Good alternative if the group isn't feeling crab or wants something lighter before the flight.",
+                tags:[["Richmond","def"]], maps:"https://maps.google.com/?q=Burma+Superstar+309+Clement+St+San+Francisco" }
+            ]},
+            { time:"6:00 PM", label:"Head to SFO", open:true, options:[
+              { emoji:"🚗", name:"Rideshare to SFO", badge:"Hard Out", locked:true, hood:"~45–60 min from Richmond",
+                desc:"Flight departs 8:55PM. Wednesday evening traffic on 101 can be rough — leave PPQ/hotel by 6PM at the absolute latest. Rideshare is easiest from the Richmond.",
+                tags:[["⏰ Leave no later than 6PM","warn"]] }
+            ]}
+          ]
+        },
+        { id:"tips", nav:"Tips", idx:"04", type:"tips", kicker:"Extras", title:"Tips & Backups",
+          logistics:[
+            { icon:"📞", title:"Book these now", text:"Original Joe's (weeks in advance — do it today). Rintaro on Resy (book this week). Swan Oyster Depot has no reservations, just line up." },
+            { icon:"💵", title:"Bring cash", text:"Swan Oyster Depot (cash only). Li Po (strongly prefers cash). Molinari (card works but cash is smoother)." },
+            { icon:"🚗", title:"Getting around", text:"Uber/Lyft everywhere. Don't rent a car — parking in SF is miserable and everything is spread across neighborhoods." },
+            { icon:"🧥", title:"Layers are non-negotiable", text:"Late June is Karl the Fog season. Could be cold and gray by 5PM even if it's warm at noon. Everyone needs a jacket." },
+            { icon:"🏨", title:"Hotel Spero neighborhood", text:"Tenderloin/Union Square border. Walk toward Union Square (down Stockton). Avoid wandering west on Taylor late at night. Hotel itself is fine." }
+          ],
+          bonus:[
+            { title:"🍽️ More Food", items:[
+              { name:"Zuni Café", text:"— Brick-oven roast chicken for two. SF classic." },
+              { name:"Dumpling Home", text:"— XLB that rival Shanghai. Book ahead." },
+              { name:"Z&Y Restaurant", text:"— Best Sichuan in Chinatown." },
+              { name:"Nopa", text:"— Late-night kitchen until 1AM. Great for after OJ's." },
+              { name:"Sam's Grill", text:"— Old-school SF seafood, lunch vibes." }
+            ]},
+            { title:"🍸 More Bars", items:[
+              { name:"Trick Dog", text:"— One of the best craft cocktail bars in the country." },
+              { name:"Smuggler's Cove", text:"— 500+ rums, full tiki vibes." },
+              { name:"Zeitgeist", text:"— Massive beer garden. Cash, cheap, great energy." },
+              { name:"Tommy's Mexican", text:"— The tequila bar that changed American tequila culture." },
+              { name:"The Alembic", text:"— Haight, whiskey-forward cocktails." }
+            ]},
+            { title:"🌁 If You Get Time", items:[
+              { name:"Lands End Trail", text:"— Coastal hike + ruins of Sutro Baths." },
+              { name:"Clarion Alley", text:"— Mission murals, best open-air gallery in the city." },
+              { name:"Golden Gate Bridge", text:"— Walk it. Marin Headlands for the best view." },
+              { name:"Haight-Ashbury", text:"— Even a walk down Haight St is a vibe." }
+            ]},
+            { title:"🗺️ Neighborhoods", items:[
+              { name:"North Beach", text:"— Italian, old SF, Molinari, OJ's" },
+              { name:"Chinatown", text:"— Li Po, bakeries, easy walk from NB" },
+              { name:"Mission", text:"— Stonemill, Rintaro, Tartine, Dolores" },
+              { name:"Inner Sunset", text:"— San Tung, near GG Park" },
+              { name:"Richmond", text:"— PPQ, Burma Superstar, less touristy" }
+            ]}
+          ]
+        }
+      ]
+    };
+  }
+
+  tagStyle(k){
+    const base = "font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:4px 9px;border-radius:2px;border:1px solid;display:inline-block;line-height:1.35;";
+    const m = {
+      pick:"border-color:#3a5a3f;color:#74C18C;background:rgba(116,193,140,.08);",
+      warn:"border-color:rgba(217,138,51,.42);color:#E2A93B;background:rgba(217,138,51,.08);",
+      good:"border-color:rgba(116,193,140,.45);color:#74C18C;background:rgba(116,193,140,.09);",
+      locked:"border-color:rgba(224,169,59,.45);color:#E0A93B;background:rgba(224,169,59,.08);",
+      def:"border-color:#332d27;color:#9a8f80;"
+    };
+    return base + (m[k] || m.def);
+  }
+
+  buildCard(o){
+    const CARD = "position:relative;background:#141210;border:1px solid #2a2521;border-radius:3px;padding:22px 24px;";
+    const LOCKED = "position:relative;background:rgba(224,169,59,.05);border:1px solid rgba(224,169,59,.4);border-radius:3px;padding:22px 24px;";
+    return {
+      emoji:o.emoji, name:o.name, hood:o.hood, desc:o.desc,
+      hasLink: !!o.href, noLink: !o.href, href: o.href || "#",
+      hasMaps: !!o.maps, maps: o.maps || "#",
+      hasBadge: !!o.badge, badge: o.badge || "",
+      frameStyle: o.locked ? LOCKED : CARD,
+      tags: (o.tags || []).map(t => ({ t: t[0], style: this.tagStyle(t[1]) }))
+    };
+  }
+
+  renderVals(){
+    const s = this.state;
+    const props = this.props || {};
+    const data = this.data();
+    const activeId = s.activeDay || props.startDay || "mon";
+
+    const NAV_BASE = "font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:16px 16px 13px;background:none;border-top:none;border-left:none;border-right:none;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;border-bottom:2px solid ";
+    const nav = data.days.map(d => {
+      const active = d.id === activeId;
+      return {
+        idx: d.idx, navLabel: d.nav,
+        btnStyle: NAV_BASE + (active ? "#EA4E2C;color:#F3E9D7;" : "transparent;color:#8a8073;"),
+        idxStyle: "font-weight:700;color:" + (active ? "#EA4E2C" : "#5c544b") + ";",
+        onSelect: () => this.setState({ activeDay: d.id })
+      };
+    });
+
+    const cur = data.days.find(d => d.id === activeId) || data.days[0];
+    const isTips = cur.type === "tips";
+
+    const TAB_BASE = "font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 13px;border-radius:2px;cursor:pointer;border:1px solid ";
+
+    let slots = [];
+    if (!isTips) {
+      slots = cur.slots.map((sl, i) => {
+        const key = cur.id + "-" + i;
+        const open = (key in s.open) ? s.open[key] : (props.expandAll || !!sl.open);
+        const multi = sl.options.length > 1;
+        const sel = s.opt[key] != null ? s.opt[key] : 0;
+        const tabs = multi ? sl.options.map((o, j) => ({
+          label: o.tab,
+          style: TAB_BASE + (j === sel
+            ? "#EA4E2C;background:#EA4E2C;color:#0c0a08;"
+            : "#332d27;background:transparent;color:#9a8f80;"),
+          onSelect: () => this.setState(st => ({ opt: { ...st.opt, [key]: j } }))
+        })) : [];
+        return {
+          time: sl.time, label: sl.label,
+          rows: open ? "1fr" : "0fr",
+          arrow: open ? "rotate(180deg)" : "rotate(0deg)",
+          multi, tabs,
+          card: this.buildCard(sl.options[sel]),
+          onToggle: () => this.setState(st => ({ open: { ...st.open, [key]: !((key in st.open) ? st.open[key] : (props.expandAll || !!sl.open)) } }))
+        };
+      });
+    }
+
+    return {
+      nav,
+      isDay: !isTips,
+      isTips,
+      dayKicker: cur.kicker,
+      dayTitle: cur.title,
+      dayIndex: cur.idx,
+      slots,
+      logistics: cur.logistics || [],
+      bonus: cur.bonus || []
+    };
+  }
+}
+</script>
+</body>
+</html>

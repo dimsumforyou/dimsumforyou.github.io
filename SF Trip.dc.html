@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;background:#e8e3f0;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  ::selection{background:#7B5BFB;color:#fff;}
+  .noscroll::-webkit-scrollbar{display:none;}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:radial-gradient(120% 60% at 50% 0%,#f4e9e2 0%,#e9e3f2 48%,#e3ebf3 100%);display:flex;justify-content:center;padding:0;font-family:'Hanken Grotesk',sans-serif;">
+<div style="width:100%;max-width:440px;background:#FBF7F1;min-height:100vh;box-shadow:0 0 60px -20px rgba(40,30,60,.4);position:relative;overflow:hidden;">
+
+  <header style="position:relative;padding:26px 20px 20px;background:linear-gradient(150deg,#FF6B4A 0%,#9A52F2 52%,#3F8DFB 100%);overflow:hidden;">
+    <div style="position:absolute;inset:0;opacity:.06;mix-blend-mode:overlay;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);"></div>
+    <div style="position:absolute;right:-30px;top:-40px;font-size:200px;line-height:1;opacity:.12;transform:rotate(8deg);pointer-events:none;">🌉</div>
+    <div style="position:relative;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);">The Crew Trip · ’26</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 11px;backdrop-filter:blur(4px);">Jun 29 – Jul 1</div>
+      </div>
+      <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:46px;line-height:.96;letter-spacing:-.02em;color:#fff;margin:14px 0 0;text-shadow:0 2px 20px rgba(40,20,60,.25);">San<br>Francisco</h1>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:18px;">
+        <div style="display:flex;">
+          <sc-for list="{{ crew }}" as="c" hint-placeholder-count="4">
+            <div style="{{ c.heroStyle }}">{{ c.i }}</div>
+          </sc-for>
+        </div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12.5px;color:rgba(255,255,255,.92);">Nicole · Kim · Bryan · Kevin</div>
+      </div>
+      <div style="display:flex;gap:7px;margin-top:16px;flex-wrap:wrap;">
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11.5px;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:5px 11px;">🗓 3 days</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11.5px;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:5px 11px;">📍 14 stops</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11.5px;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:5px 11px;">♥ {{ favCount }} saved</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11.5px;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:5px 11px;">🔔 {{ remCount }} alerts</div>
+      </div>
+    </div>
+  </header>
+
+  <div style="position:sticky;top:0;z-index:60;background:rgba(251,247,241,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #EDE5D8;">
+    <div style="display:flex;gap:6px;padding:10px 14px 0;">
+      <sc-for list="{{ dayTabs }}" as="t" hint-placeholder-count="4">
+        <button onClick="{{ t.onSelect }}" style="{{ t.style }}">
+          <span style="display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14px;">{{ t.label }}</span>
+          <span style="display:block;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;opacity:.7;margin-top:1px;">{{ t.sub }}</span>
+        </button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ isDay }}" hint-placeholder-val="{{ true }}">
+      <div class="noscroll" style="display:flex;gap:7px;padding:11px 14px 11px;overflow-x:auto;">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+          <button onClick="{{ f.onSelect }}" style="{{ f.style }}">{{ f.label }}</button>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+
+  <main style="padding:18px 16px 40px;">
+
+    <sc-if value="{{ isDay }}" hint-placeholder-val="{{ true }}">
+      <div style="margin:2px 2px 18px;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em;color:#1A1714;">{{ dayTitle }}</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:13px;color:#9A52F2;margin-top:2px;">{{ daySub }}</div>
+      </div>
+
+      <sc-if value="{{ hasRows }}" hint-placeholder-val="{{ true }}">
+        <sc-for list="{{ rows }}" as="row" hint-placeholder-count="5">
+
+          <sc-if value="{{ row.isBuf }}">
+            <div style="position:relative;padding-left:42px;min-height:30px;">
+              <div style="position:absolute;left:18px;top:0;bottom:0;width:2px;background:#EAE1D3;"></div>
+              <div style="position:absolute;left:14px;top:7px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #DDD3C2;"></div>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11.5px;color:#8A8073;background:#F3ECE0;border:1px solid #EAE1D3;border-radius:999px;padding:4px 11px;margin:1px 0 11px;">{{ row.bufText }}</span>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ row.isAct }}">
+            <div style="position:relative;padding-left:42px;">
+              <div style="position:absolute;left:18px;top:0;bottom:0;width:2px;background:#EAE1D3;"></div>
+              <div style="position:absolute;left:10px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid {{ row.nodeColor }};box-shadow:0 0 0 4px #FBF7F1;"></div>
+              <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:12.5px;letter-spacing:.02em;color:#1A1714;margin-bottom:7px;">{{ row.time }}</div>
+              <div style="margin-bottom:18px;">
+                <dc-import name="TripCard" card="{{ row.card }}" hint-size="100%,240px"></dc-import>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ row.isCyoa }}">
+            <div style="position:relative;padding-left:42px;">
+              <div style="position:absolute;left:18px;top:0;bottom:0;width:2px;background:#EAE1D3;"></div>
+              <div style="position:absolute;left:10px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid {{ row.nodeColor }};box-shadow:0 0 0 4px #FBF7F1;"></div>
+              <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:12.5px;letter-spacing:.02em;color:#1A1714;margin-bottom:7px;">{{ row.time }}</div>
+              <div style="margin-bottom:18px;background:#FFFDF8;border:1.5px solid #EFE6D6;border-radius:22px;padding:13px 13px 14px;box-shadow:0 8px 22px -16px rgba(26,23,20,.3);">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                  <div style="display:inline-flex;align-items:center;gap:6px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#9A52F2;background:#9A52F216;padding:5px 10px;border-radius:999px;">⚡ Choose your adventure</div>
+                  <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10.5px;color:#A89E8E;">Tap to switch</div>
+                </div>
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;color:#1A1714;margin:9px 2px 12px;">{{ row.title }}</div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(94px,1fr));gap:8px;margin-bottom:13px;">
+                  <sc-for list="{{ row.opts }}" as="op" hint-placeholder-count="2">
+                    <button onClick="{{ op.onSelect }}" style="{{ op.tileStyle }}">
+                      <div style="font-size:21px;line-height:1;">{{ op.emoji }}</div>
+                      <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:12.5px;line-height:1.1;color:#1A1714;margin-top:5px;">{{ op.name }}</div>
+                      <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:10.5px;line-height:1.2;color:#7C7264;margin-top:2px;">{{ op.tagline }}</div>
+                    </button>
+                  </sc-for>
+                </div>
+                <dc-import name="TripCard" card="{{ row.card }}" hint-size="100%,240px"></dc-import>
+              </div>
+            </div>
+          </sc-if>
+
+        </sc-for>
+        <div style="position:relative;padding-left:42px;height:8px;">
+          <div style="position:absolute;left:18px;top:0;height:8px;width:2px;background:linear-gradient(#EAE1D3,transparent);"></div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ noRows }}">
+        <div style="text-align:center;padding:50px 20px;color:#A89E8E;">
+          <div style="font-size:34px;">🧭</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;color:#6B6258;margin-top:10px;">Nothing here yet</div>
+          <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:13px;margin-top:4px;">No stops match this filter for {{ dayTitle }}.</div>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{ isInfo }}">
+      <div style="margin:2px 2px 18px;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em;color:#1A1714;">Trip Info</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:13px;color:#9A52F2;margin-top:2px;">Logistics, money & backups</div>
+      </div>
+
+      <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9A9082;margin:6px 2px 12px;">Need to know</div>
+      <sc-for list="{{ logistics }}" as="lg" hint-placeholder-count="5">
+        <div style="display:flex;gap:13px;align-items:flex-start;background:#fff;border:1px solid #ECE4D9;border-radius:16px;padding:13px 14px;margin-bottom:9px;box-shadow:0 6px 18px -15px rgba(26,23,20,.3);">
+          <div style="font-size:19px;width:34px;height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:{{ lg.tint }};border-radius:11px;">{{ lg.icon }}</div>
+          <div style="flex:1;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14.5px;color:#1A1714;">{{ lg.title }}</div>
+            <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:13px;line-height:1.5;color:#5C5447;margin-top:3px;">{{ lg.text }}</div>
+          </div>
+        </div>
+      </sc-for>
+
+      <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9A9082;margin:26px 2px 12px;">Bonus picks</div>
+      <sc-for list="{{ bonus }}" as="bc" hint-placeholder-count="4">
+        <div style="background:#fff;border:1px solid #ECE4D9;border-radius:16px;padding:14px 16px;margin-bottom:9px;box-shadow:0 6px 18px -15px rgba(26,23,20,.3);">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:14px;color:{{ bc.color }};margin-bottom:9px;">{{ bc.title }}</div>
+          <sc-for list="{{ bc.items }}" as="it">
+            <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:13px;line-height:1.45;color:#6B6258;padding:7px 0;border-top:1px solid #F3ECE0;"><strong style="color:#1A1714;font-weight:700;">{{ it.name }}</strong> {{ it.text }}</div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </sc-if>
+
+  </main>
+
+  <footer style="text-align:center;padding:8px 0 30px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;color:#B7AD9C;">Made for the crew · SF ’26 🌉</footer>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startDay&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mon&quot;,&quot;tue&quot;,&quot;wed&quot;,&quot;info&quot;],&quot;default&quot;:&quot;mon&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = { day: null, filter: "all", picks: {}, fav: {}, rem: {} };
+  }
+
+  crewData(){
+    return {
+      k:{ n:"Nicole", c:"#FF5A3C" },
+      m:{ n:"Kim",    c:"#7B5BFB" },
+      d:{ n:"Bryan",  c:"#07B4A6" },
+      p:{ n:"Kevin",  c:"#FF9F1C" }
+    };
+  }
+  cats(){
+    return {
+      eat:  { c:"#FF5A3C", t:"#FF5A3C18", label:"Eat" },
+      drink:{ c:"#7B5BFB", t:"#7B5BFB18", label:"Drink" },
+      sight:{ c:"#07B4A6", t:"#07B4A618", label:"Sights" },
+      chill:{ c:"#58B948", t:"#58B94818", label:"Chill" },
+      move: { c:"#FF9F1C", t:"#FF9F1C1C", label:"Travel" }
+    };
+  }
+
+  data(){
+    const A = "https://maps.google.com/?q=";
+    return {
+      mon:{ title:"Monday", sub:"Arrival ritual · Jun 29", tl:[
+        { k:"act", time:"11:20 AM", a:{ id:"m-land", cat:"move", emoji:"🛬", title:"Land at SFO", hood:"Intl Terminal", addr:"San Francisco Intl (SFO)", maps:A+"SFO+airport", mand:true,
+          desc:"Wheels down 11:20 AM. Grab bags, regroup at the rideshare island, and get moving while everyone's fresh.", who:["k","m","d","p"],
+          chips:[{k:"good",t:"On schedule"},{k:"hours",t:"Meet at Door 5"}] } },
+        { k:"buf", mode:"🚗", dur:"35 min ride", to:"Union Square" },
+        { k:"act", time:"12:10 PM", a:{ id:"m-hotel", cat:"move", emoji:"🏨", title:"Drop bags · Hotel Spero", hood:"Tenderloin", addr:"405 Taylor St", maps:A+"Hotel+Spero+405+Taylor+St+San+Francisco", mand:true,
+          desc:"Room may not be ready till 3 PM — ask the desk to stash luggage. Freshen up, then walk down Stockton to orient.", who:["k","m","d","p"],
+          chips:[{k:"locked",t:"Check-in 3 PM"},{k:"cost",t:"$268/nt · split 4 = $67pp"}] } },
+        { k:"buf", mode:"🚶", dur:"12 min walk", to:"North Beach" },
+        { k:"cyoa", time:"1:00 PM", title:"Lunch — pick a track", opts:[
+          { cat:"eat", emoji:"🥩", name:"Molinari Deli", tagline:"Porchetta + park", title:"Molinari Deli", hood:"North Beach", addr:"373 Columbus Ave", maps:A+"Molinari+Delicatessen+373+Columbus+Ave+San+Francisco", mand:false, who:["k","m","d","p"],
+            desc:"North Beach institution. Grab a number the second you walk in. Porchetta on a Dutch roll, eaten in Washington Square Park across the street. Perfect first bite.",
+            chips:[{k:"good",t:"Kevin's pick"},{k:"rez",t:"Walk-in · grab a number"},{k:"cost",t:"≈ $16pp"}] },
+          { cat:"eat", emoji:"🦞", name:"Swan Oyster", tagline:"Raw bar, cash", title:"Swan Oyster Depot", hood:"Nob Hill", addr:"1517 Polk St", maps:A+"Swan+Oyster+Depot+1517+Polk+St+San+Francisco", mand:false, who:["k","d"],
+            desc:"Counter-only raw bar — chowder, crab louie, oysters, cold beer. Only works if you move fast off the plane; closes at 3 PM.",
+            chips:[{k:"warn",t:"Cash only"},{k:"warn",t:"Closes 3 PM"},{k:"cost",t:"≈ $45pp"}] }
+        ]},
+        { k:"buf", mode:"🚶", dur:"8 min walk", to:"Chinatown" },
+        { k:"cyoa", time:"2:30 PM", title:"Afternoon detour", opts:[
+          { cat:"sight", emoji:"🚶", name:"NB → Chinatown", tagline:"Free wander", title:"North Beach → Chinatown Walk", hood:"Chinatown", addr:"Columbus & Grant Ave", maps:A+"Chinatown+San+Francisco", mand:false, who:["k","m","d","p"],
+            desc:"Stroll Columbus south into Chinatown. Hit Golden Gate Bakery for egg tarts if the line's sane. Ends right by Li Po — perfect drinks setup.",
+            chips:[{k:"good",t:"Free"},{k:"hours",t:"~45 min"}] },
+          { cat:"sight", emoji:"🌁", name:"Coit Tower", tagline:"Big city views", title:"Coit Tower", hood:"Telegraph Hill", addr:"1 Telegraph Hill Blvd", maps:A+"Coit+Tower+San+Francisco", mand:false, who:["m","p"],
+            desc:"Short hike up from Washington Square. Bay, bridge and skyline on a clear day. Free to walk the hill, $15 inside.",
+            chips:[{k:"cost",t:"Free outside · $15 in"},{k:"hours",t:"Til 5 PM"}] }
+        ]},
+        { k:"buf", mode:"🚶", dur:"6 min walk", to:"Grant Ave" },
+        { k:"act", time:"5:00 PM", a:{ id:"m-lipo", cat:"drink", emoji:"🏮", title:"Li Po Cocktail Lounge", hood:"Chinatown", addr:"916 Grant Ave", maps:A+"Li+Po+Cocktail+Lounge+916+Grant+Ave+San+Francisco", mand:true,
+          desc:"Legendary dive — get the Chinese Mai Tai, strong and sticky. Red-lantern glow, vintage everything. An SF rite of passage.", who:["k","m","d","p"],
+          chips:[{k:"good",t:"Kevin's pick"},{k:"hours",t:"Opens 2 PM"},{k:"cost",t:"≈ $14 / drink"}] } },
+        { k:"buf", mode:"🚗", dur:"22 min ride", to:"the Mission" },
+        { k:"cyoa", time:"7:00 PM", title:"Dinner — tonight only", opts:[
+          { cat:"eat", emoji:"🍢", name:"Rintaro", tagline:"Best izakaya", title:"Izakaya Rintaro", hood:"Mission", addr:"82 14th St", maps:A+"Rintaro+82+14th+St+San+Francisco", mand:false, who:["k","m","d","p"],
+            desc:"SF's best izakaya — handmade udon, yakitori over binchotan, gorgeous room. Get the mushroom yakitori, sashimi and udon.",
+            chips:[{k:"good",t:"Kevin's pick"},{k:"rez",t:"Resy · book this week"},{k:"warn",t:"Closed Tue & Sat"},{k:"cost",t:"≈ $55pp"}] },
+          { cat:"eat", emoji:"🍗", name:"San Tung", tagline:"Those wings", title:"San Tung", hood:"Inner Sunset", addr:"1031 Irving St", maps:A+"San+Tung+1031+Irving+St+San+Francisco", mand:false, who:["d","p"],
+            desc:"The dry-fried chicken wings are one of the best things in SF — sweet, sticky, impossible to stop. Add the dry black bean noodles.",
+            chips:[{k:"good",t:"Kevin's pick"},{k:"rez",t:"No rez · name on board"},{k:"warn",t:"Closed Tue & Wed"},{k:"cost",t:"≈ $25pp"}] },
+          { cat:"eat", emoji:"🍗", name:"Do Both", tagline:"Go all in", title:"San Tung + Rintaro", hood:"Sunset → Mission", addr:"Two-stop feast", maps:A+"San+Tung+1031+Irving+St+San+Francisco", mand:false, who:["k","m","d","p"],
+            desc:"Appetite's up? San Tung late lunch at 3–4 PM (wings + noodles, kept light), then Rintaro at 7. Both are Monday-only — might as well.",
+            chips:[{k:"warn",t:"Only works Mon"},{k:"cost",t:"≈ $70pp total"}] }
+        ]}
+      ]},
+      tue:{ title:"Tuesday", sub:"Main character day · Jun 30", tl:[
+        { k:"cyoa", time:"10:00 AM", title:"Slow morning", opts:[
+          { cat:"chill", emoji:"🍵", name:"Stonemill", tagline:"Matcha + sando", title:"Stonemill Matcha", hood:"Mission", addr:"561 Valencia St", maps:A+"Stonemill+Matcha+561+Valencia+St+San+Francisco", mand:false, who:["m","p","k"],
+            desc:"Vibe first, food close behind. Tamago sando and Japanese breakfast, stone-ground matcha that isn't sweet. Calm start before the day kicks off.",
+            chips:[{k:"good",t:"Kevin's pick"},{k:"hours",t:"Opens 10 AM"},{k:"cost",t:"≈ $18pp"}] },
+          { cat:"chill", emoji:"☕", name:"Sightglass", tagline:"Close to hotel", title:"Sightglass Coffee", hood:"SoMa", addr:"270 7th St", maps:A+"Sightglass+Coffee+270+7th+St+San+Francisco", mand:false, who:["d"],
+            desc:"Big airy industrial space a few blocks from the hotel. Good beans, good food, easy to linger without an early Uber to the Mission.",
+            chips:[{k:"hours",t:"Opens 7 AM"},{k:"good",t:"Near hotel"},{k:"cost",t:"≈ $9pp"}] }
+        ]},
+        { k:"buf", mode:"🚶", dur:"10 min walk", to:"Valencia St" },
+        { k:"cyoa", time:"12:00 PM", title:"Afternoon — three tracks", opts:[
+          { cat:"sight", emoji:"🎨", name:"SFMOMA", tagline:"5 floors of art", title:"SFMOMA", hood:"SoMa", addr:"151 3rd St", maps:A+"SFMOMA+151+3rd+St+San+Francisco", mand:false, who:["m","p"],
+            desc:"World-class modern art, always-rotating shows. Good for 2–3 hours of wandering, close to the hotel.",
+            chips:[{k:"hours",t:"10 AM – 5 PM"},{k:"cost",t:"≈ $30 entry"}] },
+          { cat:"chill", emoji:"🌿", name:"Dolores", tagline:"Park hang", title:"Dolores Park", hood:"Mission", addr:"18th & Dolores", maps:A+"Dolores+Park+San+Francisco", mand:false, who:["k","d"],
+            desc:"The social heartbeat of SF on a sunny day. Vendors, skyline views, premium people-watching. Zero commitment, pairs with Stonemill.",
+            chips:[{k:"good",t:"Free"},{k:"hours",t:"Anytime"}] },
+          { cat:"sight", emoji:"🚋", name:"Castro", tagline:"Bar + summit", title:"Castro + Twin Peaks", hood:"Castro", addr:"Castro & Market", maps:A+"Twin+Peaks+San+Francisco", mand:false, who:["k","m","d","p"],
+            desc:"Walk the Castro, drink at Twin Peaks Tavern (a genuine landmark), then Uber to the summit for the full panorama. Underrated afternoon.",
+            chips:[{k:"good",t:"Views"},{k:"hours",t:"Flexible"}] }
+        ]},
+        { k:"buf", mode:"🚗", dur:"15 min ride", to:"North Beach" },
+        { k:"act", time:"4:00 PM", a:{ id:"t-oj", cat:"eat", emoji:"🍝", title:"Original Joe's", hood:"North Beach", addr:"601 Union St", maps:A+"Original+Joe%27s+601+Union+St+San+Francisco", mand:true,
+          desc:"Dinner with Kevin's parents. Classic Italian-American — red booths, dark wood, veal piccata and rack of lamb. Comfortable and dressy-ish.", who:["k","m","d","p"],
+          chips:[{k:"rez",t:"Booked · 4:00 PM (6)"},{k:"locked",t:"Kevin's parents joining"},{k:"cost",t:"≈ $60pp"}] } }
+      ]},
+      wed:{ title:"Wednesday", sub:"Recovery & departure · Jul 1", tl:[
+        { k:"cyoa", time:"Morning", title:"Loose morning", opts:[
+          { cat:"eat", emoji:"🥐", name:"Tartine", tagline:"Best bread", title:"Tartine Bakery", hood:"Mission", addr:"600 Guerrero St", maps:A+"Tartine+Bakery+600+Guerrero+St+San+Francisco", mand:false, who:["m","p","k"],
+            desc:"Best bread in SF — country loaf, morning bun, croque monsieur. Go early; the afternoon batch sells out fast.",
+            chips:[{k:"hours",t:"From 8 AM"},{k:"cost",t:"≈ $12pp"}] },
+          { cat:"sight", emoji:"🏛️", name:"Ferry Bldg", tagline:"Stalls + walk", title:"Ferry Building", hood:"Embarcadero", addr:"1 Ferry Building", maps:A+"Ferry+Building+Marketplace+San+Francisco", mand:false, who:["d"],
+            desc:"Great food stalls any day — Acme, Cowgirl Creamery, Blue Bottle. Nice Embarcadero walk, low-commitment last morning.",
+            chips:[{k:"hours",t:"From 7 AM"},{k:"good",t:"Easy"}] }
+        ]},
+        { k:"buf", mode:"🚗", dur:"25 min ride", to:"the Richmond" },
+        { k:"cyoa", time:"4:00 PM", title:"Early send-off dinner", opts:[
+          { cat:"eat", emoji:"🦀", name:"PPQ", tagline:"Garlic crab", title:"PPQ Dungeness Island", hood:"Richmond", addr:"5821 Geary Blvd", maps:A+"PPQ+Dungeness+Island+5821+Geary+Blvd+San+Francisco", mand:false, who:["k","m","d","p"],
+            desc:"Opens 4 PM Wed — lines up perfectly before the flight. Garlic butter crab and garlic noodles are the move. Messy, worth it.",
+            chips:[{k:"good",t:"✓ Wed works · opens 4 PM"},{k:"warn",t:"Leave by 6 PM"},{k:"cost",t:"≈ $42pp"}] },
+          { cat:"eat", emoji:"🍜", name:"Burma", tagline:"Tea-leaf salad", title:"Burma Superstar", hood:"Richmond", addr:"309 Clement St", maps:A+"Burma+Superstar+309+Clement+St+San+Francisco", mand:false, who:["m","p"],
+            desc:"Incredible tea-leaf and rainbow salads, coconut noodles. Also in the Richmond, lighter than crab if that's the vibe before flying.",
+            chips:[{k:"rez",t:"No rez · short wait"},{k:"cost",t:"≈ $28pp"}] }
+        ]},
+        { k:"buf", mode:"🚗", dur:"45–60 min ride", to:"SFO" },
+        { k:"act", time:"6:00 PM", a:{ id:"w-sfo", cat:"move", emoji:"🚗", title:"Ride to SFO", hood:"Hard out", addr:"From the Richmond → SFO", maps:A+"SFO+airport", mand:true,
+          desc:"Flight departs 8:55 PM. Wednesday traffic on 101 gets rough — leave by 6 PM at the absolute latest. Rideshare is easiest from the Richmond.", who:["k","m","d","p"],
+          chips:[{k:"warn",t:"⏰ Leave by 6 PM sharp"},{k:"cost",t:"≈ $55 · split 4"}] } }
+      ]},
+      info:{ title:"Trip Info", tips:true,
+        logistics:[
+          { icon:"📞", tint:"#7B5BFB18", title:"Book these now", text:"Original Joe's (weeks out — do it today). Rintaro on Resy this week. Swan & San Tung take no rez — just line up." },
+          { icon:"💵", tint:"#58B94818", title:"Bring cash", text:"Swan Oyster Depot (cash only). Li Po strongly prefers cash. Settle group splits in the chat — venmo nightly so it doesn't pile up." },
+          { icon:"🚗", tint:"#FF9F1C1C", title:"Getting around", text:"Uber/Lyft everywhere. Don't rent a car — parking is miserable and stops are spread across neighborhoods." },
+          { icon:"🧥", tint:"#07B4A618", title:"Layers, always", text:"Late June is Karl the Fog season — cold and grey by 5 PM even if noon was warm. Everyone packs a jacket." },
+          { icon:"🏨", tint:"#FF5A3C18", title:"Hotel Spero area", text:"Tenderloin/Union Square border. Walk toward Union Square (down Stockton). Avoid wandering west on Taylor late. Hotel itself is fine." }
+        ],
+        bonus:[
+          { title:"🍽️ More food", color:"#FF5A3C", items:[
+            { name:"Zuni Café", text:"— Brick-oven roast chicken for two. SF classic." },
+            { name:"Dumpling Home", text:"— XLB that rival Shanghai. Book ahead." },
+            { name:"Z&Y", text:"— Best Sichuan in Chinatown." },
+            { name:"Nopa", text:"— Late kitchen til 1 AM. Great after OJ's." }
+          ]},
+          { title:"🍸 More bars", color:"#7B5BFB", items:[
+            { name:"Trick Dog", text:"— Top craft cocktail bar in the country." },
+            { name:"Smuggler's Cove", text:"— 500+ rums, full tiki." },
+            { name:"Zeitgeist", text:"— Massive beer garden, cash, great energy." },
+            { name:"The Alembic", text:"— Haight, whiskey-forward." }
+          ]},
+          { title:"🌁 If time", color:"#07B4A6", items:[
+            { name:"Lands End", text:"— Coastal hike + Sutro Baths ruins." },
+            { name:"Clarion Alley", text:"— Best open-air mural gallery." },
+            { name:"Golden Gate Bridge", text:"— Walk it; Marin Headlands for the view." }
+          ]},
+          { title:"🗺️ Neighborhoods", color:"#FF9F1C", items:[
+            { name:"North Beach", text:"— Italian, old SF, Molinari, OJ's." },
+            { name:"Mission", text:"— Stonemill, Rintaro, Tartine, Dolores." },
+            { name:"Richmond", text:"— PPQ, Burma, less touristy." }
+          ]}
+        ]
+      }
+    };
+  }
+
+  chipStyle(k){
+    const base="display:inline-flex;align-items:center;gap:4px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:.005em;padding:5px 9px;border-radius:999px;border:1px solid;line-height:1;";
+    const m={
+      rez:"color:#2F5BD6;background:#EDF2FE;border-color:#D7E1FC;",
+      cost:"color:#1A1714;background:#F4EFE8;border-color:#E7DECF;",
+      hours:"color:#6B6258;background:#FBF7F1;border-color:#E7DECF;",
+      warn:"color:#C2410C;background:#FEF1E7;border-color:#F6D6BF;",
+      good:"color:#2F8F3E;background:#ECF7EC;border-color:#CDE9CE;",
+      locked:"color:#8A6D1F;background:#FBF3DE;border-color:#EAD9A8;"
+    };
+    return base+(m[k]||m.hours);
+  }
+  chipIcon(k){ return ({rez:"📅",cost:"💸",hours:"🕒",warn:"⚠️",good:"✓",locked:"🔒"})[k]||""; }
+
+  buildCard(a){
+    const cats=this.cats(), crew=this.crewData();
+    const cat=cats[a.cat]||cats.eat;
+    const fav=!!this.state.fav[a.id], rem=!!this.state.rem[a.id];
+    const who=(a.who||[]).map((key,idx)=>{
+      const cr=crew[key]||{n:"?",c:"#999"};
+      return { i:cr.n[0], style:"width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:11px;color:#fff;border:2px solid #fff;background:"+cr.c+";"+(idx?"margin-left:-8px;":"") };
+    });
+    const cnt=(a.who||[]).length;
+    const whoLabel = a.mand ? (cnt>=4?"All in":cnt+" going") : (cnt>=4?"Everyone — opt in":cnt+" keen · opt in");
+    const actBase="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;border:1px solid;line-height:1;transition:all .15s;";
+    return {
+      catColor:cat.c, catTint:cat.t, catLabel:cat.label, placeEmoji:a.emoji,
+      badgeStyle:"width:42px;height:42px;flex-shrink:0;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;background:"+cat.t+";border:1px solid "+cat.c+"33;",
+      title:a.title, hood:a.hood, addr:a.addr,
+      hasMap:!!a.maps, mapsHref:a.maps||"#",
+      desc:a.desc,
+      mandText: a.mand?"Must-do":"Optional",
+      mandStyle: a.mand
+        ? "flex-shrink:0;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:#1A1714;border-radius:999px;padding:5px 10px;"
+        : "flex-shrink:0;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#9A52F2;background:#9A52F214;border:1px solid #9A52F233;border-radius:999px;padding:4px 9px;",
+      chips:(a.chips||[]).map(c=>({ icon:this.chipIcon(c.k), text:c.t, style:this.chipStyle(c.k) })),
+      who, whoLabel,
+      fav, favIcon: fav?"★":"☆",
+      favStyle: actBase+(fav?"color:#FF9F1C;background:#FF9F1C18;border-color:#FF9F1C66;":"color:#B7AD9C;background:#fff;border-color:#E7DECF;"),
+      rem, remStyle: actBase+(rem?"background:#7B5BFB18;border-color:#7B5BFB66;filter:none;":"background:#fff;border-color:#E7DECF;filter:grayscale(1) opacity(.55);"),
+      onFav: ()=>this.setState(s=>({fav:{...s.fav,[a.id]:!s.fav[a.id]}})),
+      onRem: ()=>this.setState(s=>({rem:{...s.rem,[a.id]:!s.rem[a.id]}}))
+    };
+  }
+
+  renderVals(){
+    const s=this.state, props=this.props||{}, data=this.data(), cats=this.cats(), crew=this.crewData();
+    const dayId = s.day || props.startDay || "mon";
+    const cur = data[dayId] || data.mon;
+    const isInfo = !!cur.tips;
+
+    const crewChips = Object.keys(crew).map((key,idx)=>{
+      const cr=crew[key];
+      return { i:cr.n[0], heroStyle:"width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:13px;color:#fff;border:2px solid rgba(255,255,255,.85);background:"+cr.c+";box-shadow:0 2px 6px rgba(0,0,0,.2);"+(idx?"margin-left:-9px;":"") };
+    });
+
+    const tabDef=[["mon","Mon","6/29"],["tue","Tue","6/30"],["wed","Wed","7/1"],["info","Info","tips"]];
+    const tabBase="flex:1;text-align:center;padding:9px 4px 9px;border-radius:13px 13px 0 0;cursor:pointer;border:none;border-bottom:3px solid transparent;background:none;transition:all .15s;";
+    const dayTabs=tabDef.map(t=>{
+      const active=t[0]===dayId;
+      return { label:t[1], sub:t[2],
+        style: tabBase+(active?"color:#1A1714;border-bottom-color:#FF5A3C;background:#FBF7F1;":"color:#A89E8E;"),
+        onSelect: ()=>this.setState({day:t[0]}) };
+    });
+
+    const filterDef=[["all","All"],["eat","🍜 Eat"],["drink","🍸 Drink"],["sight","📸 Sights"],["saved","★ Saved"]];
+    const fBase="flex-shrink:0;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:12px;padding:7px 13px;border-radius:999px;cursor:pointer;border:1px solid;transition:all .15s;white-space:nowrap;";
+    const filters=filterDef.map(f=>{
+      const active=f[0]===s.filter;
+      return { label:f[1],
+        style: fBase+(active?"color:#fff;background:#1A1714;border-color:#1A1714;":"color:#6B6258;background:#fff;border-color:#E7DECF;"),
+        onSelect: ()=>this.setState({filter:f[0]}) };
+    });
+
+    let rows=[], favCount=0, remCount=0;
+    Object.keys(s.fav).forEach(k=>{ if(s.fav[k]) favCount++; });
+    Object.keys(s.rem).forEach(k=>{ if(s.rem[k]) remCount++; });
+
+    if(!isInfo){
+      const flt=s.filter;
+      cur.tl.forEach((item,i)=>{
+        const key=dayId+"-"+i;
+        if(item.k==="buf"){
+          rows.push({ isBuf:true, isAct:false, isCyoa:false, bufText:item.mode+"  "+item.dur+" · to "+item.to, _buf:true });
+        } else if(item.k==="act"){
+          const a=item.a, cat=cats[a.cat]||cats.eat;
+          rows.push({ isBuf:false, isAct:true, isCyoa:false, time:item.time, nodeColor:cat.c, card:this.buildCard(a), _cat:a.cat, _id:a.id });
+        } else if(item.k==="cyoa"){
+          const sel = s.picks[key]!=null ? s.picks[key] : 0;
+          const opts=item.opts.map((o,j)=>{
+            const oc=cats[o.cat]||cats.eat;
+            const on=j===sel;
+            return { emoji:o.emoji, name:o.name, tagline:o.tagline,
+              tileStyle:"display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px 6px;border-radius:14px;cursor:pointer;transition:all .15s;border:1.5px solid "+(on?oc.c:"#ECE4D9")+";background:"+(on?oc.t:"#fff")+";"+(on?"box-shadow:0 4px 12px -8px "+oc.c+";":""),
+              onSelect: ()=>this.setState(st=>({picks:{...st.picks,[key]:j}})) };
+          });
+          const selOpt=item.opts[sel], selCat=cats[selOpt.cat]||cats.eat;
+          rows.push({ isBuf:false, isAct:false, isCyoa:true, time:item.time, title:item.title, nodeColor:selCat.c, opts, card:this.buildCard(selOpt), _cat:selOpt.cat, _id:selOpt.id });
+        }
+      });
+      // filtering
+      if(flt!=="all"){
+        rows=rows.filter(r=>{
+          if(r.isBuf) return false;
+          if(flt==="saved") return !!s.fav[r._id];
+          return r._cat===flt;
+        });
+      }
+    }
+
+    return {
+      crew:crewChips, favCount, remCount,
+      dayTabs, filters,
+      isDay:!isInfo, isInfo,
+      dayTitle:cur.title, daySub:cur.sub||"",
+      rows, hasRows:rows.length>0, noRows: !isInfo && rows.length===0,
+      logistics:cur.logistics||[], bonus:cur.bonus||[]
+    };
+  }
+}
+</script>
+</body>
+</html>

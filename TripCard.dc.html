@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="position:relative;background:#fff;border:1px solid #ECE4D9;border-radius:20px;overflow:hidden;box-shadow:0 8px 22px -14px rgba(26,23,20,.3);">
+  <div style="height:5px;background:{{ card.catColor }};"></div>
+  <div style="padding:15px 15px 14px;">
+
+    <div style="display:flex;gap:11px;align-items:flex-start;">
+      <div style="{{ card.badgeStyle }}">{{ card.placeEmoji }}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:17px;line-height:1.15;color:#1A1714;letter-spacing:-.01em;">{{ card.title }}</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#9A9082;margin-top:3px;">{{ card.catLabel }} · {{ card.hood }}</div>
+      </div>
+      <div style="{{ card.mandStyle }}">{{ card.mandText }}</div>
+    </div>
+
+    <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:13.5px;line-height:1.5;color:#5C5447;margin:11px 0 12px;">{{ card.desc }}</div>
+
+    <sc-if value="{{ card.hasMap }}">
+      <a href="{{ card.mapsHref }}" target="_blank" style="display:block;position:relative;height:72px;border-radius:14px;overflow:hidden;border:1px solid #E7DECF;margin-bottom:12px;background-color:{{ card.catTint }};background-image:repeating-linear-gradient(0deg,transparent 0 13px,rgba(26,23,20,.05) 13px 14px),repeating-linear-gradient(90deg,transparent 0 17px,rgba(26,23,20,.05) 17px 18px);">
+        <div style="position:absolute;left:-20%;top:55%;width:140%;height:9px;background:rgba(26,23,20,.07);transform:rotate(-19deg);"></div>
+        <div style="position:absolute;left:38%;top:-10%;width:8px;height:120%;background:rgba(26,23,20,.06);transform:rotate(8deg);"></div>
+        <div style="position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:{{ card.catColor }};border:3px solid #fff;box-shadow:0 2px 6px rgba(26,23,20,.35);"></div>
+        <div style="position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;border:2px solid {{ card.catColor }};opacity:.35;"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:7px 10px;background:linear-gradient(transparent,rgba(255,255,255,.92));font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;color:#3A342C;">📍 {{ card.addr }}</div>
+        <div style="position:absolute;top:7px;right:8px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:10px;letter-spacing:.02em;color:#1A1714;background:rgba(255,255,255,.9);border-radius:999px;padding:3px 8px;box-shadow:0 1px 4px rgba(26,23,20,.15);">Maps ↗</div>
+      </a>
+    </sc-if>
+
+    <div style="display:flex;flex-wrap:wrap;gap:6px;">
+      <sc-for list="{{ card.chips }}" as="ch" hint-placeholder-count="2">
+        <span style="{{ ch.style }}">{{ ch.icon }} {{ ch.text }}</span>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ card.rem }}">
+      <div style="display:flex;align-items:center;gap:6px;margin-top:11px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11.5px;color:#7B5BFB;background:#7B5BFB12;border-radius:9px;padding:7px 10px;">🔔 Reminder set — you'll get a nudge 30 min before</div>
+    </sc-if>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:13px;padding-top:12px;border-top:1px solid #F1EADF;">
+      <div style="display:flex;align-items:center;gap:9px;min-width:0;">
+        <div style="display:flex;">
+          <sc-for list="{{ card.who }}" as="p" hint-placeholder-count="4">
+            <div style="{{ p.style }}">{{ p.i }}</div>
+          </sc-for>
+        </div>
+        <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11.5px;color:#6B6258;white-space:nowrap;">{{ card.whoLabel }}</span>
+      </div>
+      <div style="display:flex;gap:7px;flex-shrink:0;">
+        <button onClick="{{ card.onFav }}" style="{{ card.favStyle }}">{{ card.favIcon }}</button>
+        <button onClick="{{ card.onRem }}" style="{{ card.remStyle }}">🔔</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:408,&quot;height&quot;:300},&quot;card&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;}}"></script>
+</body>
+</html>
