@@ -157,7 +157,7 @@ class Component extends DCLogic {
     const M = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
     const K = ["k"], KN = ["k","n"];
     return {
-      out:{ title:"Getting there", sub:"Fri Oct 9 – Sat Oct 10 · Kevin only", tl:[
+      out:{ title:"Getting there", sub:"Fri Oct 9 – Sat Oct 10", tl:[
         { k:"head", day:"Fri Oct 9", sub:"Los Angeles → Taipei" },
         { k:"act", time:"12:05 AM", a:{ cat:"fly", emoji:"🛫", title:"LAX → Taipei", hood:"China Airlines CI 7", addr:"LAX, Tom Bradley International Terminal", maps:M("Tom Bradley International Terminal LAX"), status:"Business", who:K,
           desc:"Leaves just after midnight. Lands in Taipei on Saturday at 5:10 AM, Terminal 2.",
@@ -166,7 +166,7 @@ class Component extends DCLogic {
         { k:"act", time:"8:40 AM", a:{ cat:"fly", emoji:"✈️", title:"Taipei → Shanghai", hood:"China Airlines CI 501", addr:"Taipei Taoyuan (TPE), Terminal 2", maps:M("Taoyuan International Airport Terminal 2"), status:"Booked", who:K,
           desc:"Short hop to Shanghai Pudong. Lands at 10:50 AM.",
           chips:[{k:"hours",t:"Lands 10:50 AM"},{k:"locked",t:"Pudong (PVG)"}] } },
-        { k:"act", time:"Oct 10 – 19", a:{ cat:"free", emoji:"🏙️", title:"Shanghai", hood:"Kevin only", addr:"", maps:"", status:"Not planned here", who:K,
+        { k:"act", time:"Oct 10 – 19", a:{ cat:"free", emoji:"🏙️", title:"Shanghai", hood:"Shanghai", addr:"", maps:"", status:"Not planned here", who:K,
           desc:"Nothing is planned on this page for Shanghai. The next stop is the flight to Busan on Monday Oct 19.",
           chips:[] } }
       ]},
