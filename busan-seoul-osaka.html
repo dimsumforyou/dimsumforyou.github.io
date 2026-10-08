@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Busan · Seoul · Osaka ’26</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;background:#e8e3f0;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  ::selection{background:#7B5BFB;color:#fff;}
+  .noscroll::-webkit-scrollbar{display:none;}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:radial-gradient(120% 60% at 50% 0%,#f4e9e2 0%,#e9e3f2 48%,#e3ebf3 100%);display:flex;justify-content:center;padding:0;font-family:'Hanken Grotesk',sans-serif;">
+<div style="width:100%;max-width:440px;background:#FBF7F1;min-height:100vh;box-shadow:0 0 60px -20px rgba(40,30,60,.4);position:relative;overflow:hidden;">
+
+  <header style="position:relative;padding:26px 20px 20px;background:linear-gradient(150deg,#FF6B4A 0%,#C94FB5 48%,#3F8DFB 100%);overflow:hidden;">
+    <div style="position:absolute;inset:0;opacity:.06;mix-blend-mode:overlay;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);"></div>
+    <div style="position:absolute;right:-30px;top:-30px;font-size:200px;line-height:1;opacity:.12;transform:rotate(8deg);pointer-events:none;">🏯</div>
+    <div style="position:relative;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);">Kevin + Nicole · ’26</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 11px;backdrop-filter:blur(4px);">Oct 19 – 26</div>
+      </div>
+      <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:42px;line-height:.98;letter-spacing:-.02em;color:#fff;margin:14px 0 0;text-shadow:0 2px 20px rgba(40,20,60,.25);">Busan<br>Seoul<br>Osaka</h1>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:18px;">
+        <div style="display:flex;">
+          <sc-for list="{{ crew }}" as="c" hint-placeholder-count="2">
+            <div style="{{ c.heroStyle }}">{{ c.i }}</div>
+          </sc-for>
+        </div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12.5px;color:rgba(255,255,255,.92);">Kevin · Nicole</div>
+      </div>
+      <div style="display:flex;gap:7px;margin-top:16px;flex-wrap:wrap;">
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11.5px;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:5px 11px;">🏨 3 stays</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11.5px;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:5px 11px;">✈️ 6 flights</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11.5px;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:5px 11px;">🚄 1 train</div>
+      </div>
+    </div>
+  </header>
+
+  <div style="position:sticky;top:0;z-index:60;background:rgba(251,247,241,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #EDE5D8;">
+    <div style="display:flex;gap:6px;padding:10px 14px 0;">
+      <sc-for list="{{ dayTabs }}" as="t" hint-placeholder-count="5">
+        <button onClick="{{ t.onSelect }}" style="{{ t.style }}">
+          <span style="display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14px;">{{ t.label }}</span>
+          <span style="display:block;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:10px;opacity:.7;margin-top:1px;">{{ t.sub }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+
+  <main style="padding:18px 16px 40px;">
+
+    <sc-if value="{{ isDay }}" hint-placeholder-val="{{ true }}">
+      <div style="margin:2px 2px 18px;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em;color:#1A1714;">{{ dayTitle }}</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:13px;color:#9A52F2;margin-top:2px;">{{ daySub }}</div>
+      </div>
+
+      <sc-for list="{{ rows }}" as="row" hint-placeholder-count="5">
+
+        <sc-if value="{{ row.isHead }}">
+          <div style="position:relative;padding-left:42px;padding-bottom:12px;padding-top:2px;">
+            <div style="position:absolute;left:18px;top:0;bottom:0;width:2px;background:#EAE1D3;"></div>
+            <div style="position:absolute;left:12px;top:5px;width:14px;height:14px;border-radius:4px;transform:rotate(45deg);background:#1A1714;box-shadow:0 0 0 4px #FBF7F1;"></div>
+            <div style="display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;">
+              <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:15px;letter-spacing:.03em;text-transform:uppercase;color:#1A1714;">{{ row.headDay }}</span>
+              <span style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:12.5px;color:#8A8073;">{{ row.headSub }}</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ row.isBuf }}">
+          <div style="position:relative;padding-left:42px;min-height:30px;">
+            <div style="position:absolute;left:18px;top:0;bottom:0;width:2px;background:#EAE1D3;"></div>
+            <div style="position:absolute;left:14px;top:7px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #DDD3C2;"></div>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11.5px;color:#8A8073;background:#F3ECE0;border:1px solid #EAE1D3;border-radius:999px;padding:4px 11px;margin:1px 0 11px;">{{ row.bufText }}</span>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ row.isAct }}">
+          <div style="position:relative;padding-left:42px;">
+            <div style="position:absolute;left:18px;top:0;bottom:0;width:2px;background:#EAE1D3;"></div>
+            <div style="position:absolute;left:10px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid {{ row.nodeColor }};box-shadow:0 0 0 4px #FBF7F1;"></div>
+            <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:12.5px;letter-spacing:.02em;color:#1A1714;margin-bottom:7px;">{{ row.time }}</div>
+            <div style="margin-bottom:18px;">
+              <dc-import name="JourneyCard" card="{{ row.card }}" hint-size="100%,240px"></dc-import>
+            </div>
+          </div>
+        </sc-if>
+
+      </sc-for>
+      <div style="position:relative;padding-left:42px;height:8px;">
+        <div style="position:absolute;left:18px;top:0;height:8px;width:2px;background:linear-gradient(#EAE1D3,transparent);"></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isInfo }}">
+      <div style="margin:2px 2px 18px;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em;color:#1A1714;">Trip Info</div>
+        <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:13px;color:#9A52F2;margin-top:2px;">Stays, airports, phone numbers</div>
+      </div>
+      <sc-for list="{{ info }}" as="tip">
+        <div style="background:#FFFDF8;border:1.5px solid #EFE6D6;border-radius:18px;padding:14px 16px;margin-bottom:12px;box-shadow:0 4px 14px -10px rgba(26,23,20,.2);">
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="font-size:22px;line-height:1;min-width:28px;margin-top:2px;">{{ tip.icon }}</div>
+            <div style="min-width:0;">
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;color:#1A1714;margin-bottom:4px;">{{ tip.title }}</div>
+              <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:13px;line-height:1.5;color:#5A5247;">{{ tip.text }}</div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </sc-if>
+
+  </main>
+
+  <footer style="text-align:center;padding:8px 0 30px;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;color:#B7AD9C;">Kevin + Nicole · Busan, Seoul, Osaka ’26 🏯</footer>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startDay&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;out&quot;,&quot;busan&quot;,&quot;seoul&quot;,&quot;osaka&quot;,&quot;info&quot;],&quot;default&quot;:&quot;busan&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = { day: null };
+  }
+
+  crewData(){
+    return {
+      k:{ n:"Kevin",  c:"#FF9F1C" },
+      n:{ n:"Nicole", c:"#FF5A3C" }
+    };
+  }
+  cats(){
+    return {
+      fly:  { c:"#3F8DFB", t:"#3F8DFB18", label:"Flight" },
+      train:{ c:"#FF5A3C", t:"#FF5A3C18", label:"Train" },
+      stay: { c:"#7B5BFB", t:"#7B5BFB18", label:"Stay" },
+      go:   { c:"#FF9F1C", t:"#FF9F1C1C", label:"Be there" },
+      free: { c:"#58B948", t:"#58B94818", label:"Free day" }
+    };
+  }
+
+  data(){
+    const M = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+    const K = ["k"], KN = ["k","n"];
+    return {
+      out:{ title:"Getting there", sub:"Fri Oct 9 – Sat Oct 10 · Kevin only", tl:[
+        { k:"head", day:"Fri Oct 9", sub:"Los Angeles → Taipei" },
+        { k:"act", time:"12:05 AM", a:{ cat:"fly", emoji:"🛫", title:"LAX → Taipei", hood:"China Airlines CI 7", addr:"LAX, Tom Bradley International Terminal", maps:M("Tom Bradley International Terminal LAX"), status:"Business", who:K,
+          desc:"Leaves just after midnight. Lands in Taipei on Saturday at 5:10 AM, Terminal 2.",
+          chips:[{k:"hours",t:"Lands Sat 5:10 AM"},{k:"locked",t:"Taipei T2"}] } },
+        { k:"head", day:"Sat Oct 10", sub:"Taipei → Shanghai" },
+        { k:"act", time:"8:40 AM", a:{ cat:"fly", emoji:"✈️", title:"Taipei → Shanghai", hood:"China Airlines CI 501", addr:"Taipei Taoyuan (TPE), Terminal 2", maps:M("Taoyuan International Airport Terminal 2"), status:"Booked", who:K,
+          desc:"Short hop to Shanghai Pudong. Lands at 10:50 AM.",
+          chips:[{k:"hours",t:"Lands 10:50 AM"},{k:"locked",t:"Pudong (PVG)"}] } },
+        { k:"act", time:"Oct 10 – 19", a:{ cat:"free", emoji:"🏙️", title:"Shanghai", hood:"Kevin only", addr:"", maps:"", status:"Not planned here", who:K,
+          desc:"Nothing is planned on this page for Shanghai. The next stop is the flight to Busan on Monday Oct 19.",
+          chips:[] } }
+      ]},
+
+      busan:{ title:"Busan", sub:"Mon Oct 19 – Wed Oct 21", tl:[
+        { k:"head", day:"Mon Oct 19", sub:"Shanghai → Busan" },
+        { k:"act", time:"11:35 AM", a:{ cat:"go", emoji:"🛂", title:"Be at Pudong airport", hood:"Terminal 1", addr:"Shanghai Pudong (PVG), Terminal 1", maps:M("Shanghai Pudong International Airport Terminal 1"), status:"Be early", who:K,
+          desc:"China Eastern asks you to arrive 2 hours before the flight.",
+          chips:[{k:"warn",t:"Check your boarding pass for the terminal"}] } },
+        { k:"act", time:"1:35 PM", a:{ cat:"fly", emoji:"🛫", title:"Shanghai → Busan", hood:"China Eastern MU8605", addr:"Busan Gimhae (PUS), International Terminal", maps:M("Gimhae International Airport Busan"), status:"Economy", who:K,
+          desc:"Lands in Busan at 4:50 PM, International Terminal. Nicole meets you at the hotel.",
+          chips:[{k:"hours",t:"Lands 4:50 PM"},{k:"locked",t:"Shared with FM829"}] } },
+        { k:"act", time:"From 3:00 PM", a:{ cat:"stay", emoji:"🏨", title:"Check in · Shilla Stay Haeundae", hood:"Haeundae, Busan", addr:"Shilla Stay Haeundae", maps:M("Shilla Stay Haeundae Busan"), status:"Booked", who:KN,
+          desc:"Deluxe Family Twin with an ocean view. Two nights. You pay at the hotel.",
+          chips:[{k:"hours",t:"Check-in from 3 PM"},{k:"rez",t:"Pay at the hotel"},{k:"locked",t:"Free cancel until Oct 12, 6 PM Korea time"},{k:"hours",t:"Hotel +82-2-2230-0701"}] } },
+        { k:"head", day:"Tue Oct 20", sub:"Busan" },
+        { k:"act", time:"All day", a:{ cat:"free", emoji:"🌊", title:"Free day in Busan", hood:"Busan", addr:"", maps:"", status:"Open", who:KN,
+          desc:"Nothing booked. Plan this day on the spot.",
+          chips:[] } },
+        { k:"head", day:"Wed Oct 21", sub:"Busan → Seoul" },
+        { k:"act", time:"By 12:00 PM", a:{ cat:"stay", emoji:"🧳", title:"Check out · Shilla Stay Haeundae", hood:"Haeundae, Busan", addr:"Shilla Stay Haeundae", maps:M("Shilla Stay Haeundae Busan"), status:"Check out", who:KN,
+          desc:"Check out before noon, then head to Busan Station for the train.",
+          chips:[{k:"hours",t:"Out by 12 PM"}] } },
+        { k:"act", time:"1:17 PM", a:{ cat:"train", emoji:"🚄", title:"Busan → Seoul", hood:"KTX 124", addr:"Busan Station (KTX platforms)", maps:M("Busan Station"), status:"2 seats", who:KN,
+          desc:"Arrives at Seoul Station at 4:34 PM. The booking number is on korail.com under My Reservation.",
+          chips:[{k:"hours",t:"Arrives 4:34 PM"},{k:"hours",t:"Korail +82-1599-7777"}] } }
+      ]},
+
+      seoul:{ title:"Seoul", sub:"Wed Oct 21 – Fri Oct 23", tl:[
+        { k:"head", day:"Wed Oct 21", sub:"Arrive in Seoul" },
+        { k:"act", time:"From 3:00 PM", a:{ cat:"stay", emoji:"🏨", title:"Check in · Nine Tree by Parnas", hood:"Myeongdong", addr:"28 Mareunnae-ro, Jung-gu", maps:M("Nine Tree by Parnas Seoul Myeongdong 2 28 Mareunnae-ro"), status:"Booked", who:KN,
+          desc:"Standard Twin, two single beds. Two nights. The hotel holds a deposit at check-in and gives it back at check-out. Breakfast is not included.",
+          chips:[{k:"hours",t:"Check-in from 3 PM"},{k:"locked",t:"Free cancel until Oct 18, 12:01 AM Korea time"}] } },
+        { k:"head", day:"Thu Oct 22", sub:"Seoul" },
+        { k:"act", time:"All day", a:{ cat:"free", emoji:"🏙️", title:"Free day in Seoul", hood:"Seoul", addr:"", maps:"", status:"Open", who:KN,
+          desc:"Nothing booked. Plan this day on the spot.",
+          chips:[] } },
+        { k:"head", day:"Fri Oct 23", sub:"Seoul → Osaka" },
+        { k:"act", time:"By 12:00 PM", a:{ cat:"stay", emoji:"🧳", title:"Check out · Nine Tree by Parnas", hood:"Myeongdong", addr:"28 Mareunnae-ro, Jung-gu", maps:M("Nine Tree by Parnas Seoul Myeongdong 2 28 Mareunnae-ro"), status:"Check out", who:KN,
+          desc:"Leave your bags at the hotel if you want to look around first.",
+          chips:[{k:"hours",t:"Out by 12 PM"}] } },
+        { k:"act", time:"By 3:50 PM", a:{ cat:"go", emoji:"🛂", title:"Be at Gimpo airport", hood:"International Terminal", addr:"Seoul Gimpo (GMP), International Terminal", maps:M("Gimpo International Airport International Terminal"), status:"Be early", who:KN,
+          desc:"Agoda says arrive 3 hours early. Peach has no free checked bag.",
+          chips:[{k:"warn",t:"2 cabin bags each, 15 lb per bag"}] } },
+        { k:"act", time:"6:50 PM", a:{ cat:"fly", emoji:"🛫", title:"Seoul → Osaka", hood:"Peach MM744", addr:"Seoul Gimpo (GMP)", maps:M("Gimpo International Airport"), status:"Booked", who:KN,
+          desc:"Seats 22A and 22B. Lands at Kansai at 8:35 PM, Terminal 2. This ticket cannot be changed or refunded.",
+          chips:[{k:"hours",t:"Lands 8:35 PM"},{k:"warn",t:"No change, no refund"}] } }
+      ]},
+
+      osaka:{ title:"Osaka", sub:"Fri Oct 23 – Mon Oct 26", tl:[
+        { k:"head", day:"Fri Oct 23", sub:"Arrive in Osaka" },
+        { k:"act", time:"About 10:00 PM", a:{ cat:"stay", emoji:"🏨", title:"Check in · W Osaka", hood:"Shinsaibashi", addr:"4-1-3 Minami Semba, Chuo-ku", maps:M("W Osaka 4-1-3 Minami Semba Chuo-ku"), status:"Booked", who:KN,
+          desc:"Deluxe King with a view. Three nights. Late check-in, so tell the hotel you arrive after 10 PM. Breakfast for 2 is included.",
+          chips:[{k:"hours",t:"Check-in from 3 PM"},{k:"locked",t:"Free cancel until Oct 21, midnight Japan time"}] } },
+        { k:"head", day:"Sat Oct 24", sub:"Osaka" },
+        { k:"act", time:"All day", a:{ cat:"free", emoji:"🍜", title:"Free day in Osaka", hood:"Osaka", addr:"", maps:"", status:"Open", who:KN,
+          desc:"Nothing booked. Breakfast for 2 is included at the W.",
+          chips:[] } },
+        { k:"head", day:"Sun Oct 25", sub:"Osaka" },
+        { k:"act", time:"All day", a:{ cat:"free", emoji:"🛍️", title:"Free day in Osaka", hood:"Osaka", addr:"", maps:"", status:"Open", who:KN,
+          desc:"Nothing booked. Use your W hotel credit before you leave.",
+          chips:[] } },
+        { k:"head", day:"Mon Oct 26", sub:"Osaka → Los Angeles" },
+        { k:"act", time:"By 12:00 PM", a:{ cat:"stay", emoji:"🧳", title:"Check out · W Osaka", hood:"Shinsaibashi", addr:"4-1-3 Minami Semba, Chuo-ku", maps:M("W Osaka 4-1-3 Minami Semba Chuo-ku"), status:"Check out", who:KN,
+          desc:"Ask the hotel to hold your bags until you leave for the airport.",
+          chips:[{k:"hours",t:"Out by 12 PM"}] } },
+        { k:"act", time:"By 4:00 PM", a:{ cat:"go", emoji:"🛂", title:"Be at Kansai airport", hood:"Terminal 1", addr:"Osaka Kansai (KIX), Terminal 1", maps:M("Kansai International Airport Terminal 1"), status:"Be early", who:K,
+          desc:"Aim for 3 hours before an international flight.",
+          chips:[{k:"warn",t:"Check your boarding pass for the terminal"}] } },
+        { k:"act", time:"7:00 PM", a:{ cat:"fly", emoji:"🛫", title:"Osaka → Taipei", hood:"China Airlines CI 173", addr:"Osaka Kansai (KIX)", maps:M("Kansai International Airport Terminal 1"), status:"Booked", who:K,
+          desc:"Lands in Taipei at 9:25 PM, Terminal 2. Then you wait for the flight home.",
+          chips:[{k:"hours",t:"Lands 9:25 PM"}] } },
+        { k:"act", time:"11:50 PM", a:{ cat:"fly", emoji:"🛬", title:"Taipei → Los Angeles", hood:"China Airlines CI 8", addr:"Taipei Taoyuan (TPE), Terminal 2", maps:M("Taoyuan International Airport Terminal 2"), status:"Booked", who:K,
+          desc:"You cross the date line, so you land in Los Angeles at 8:25 PM on the same day, Mon Oct 26.",
+          chips:[{k:"hours",t:"Lands 8:25 PM, same day"}] } }
+      ]},
+
+      info:{ id:"info", title:"Trip Info", info:[
+        { icon:"🏨", title:"Shilla Stay Haeundae · Busan", text:"Mon Oct 19, from 3 PM, to Wed Oct 21, by 12 PM. Pay at the hotel. Free cancel until Oct 12, 6 PM Korea time. Hotel phone: +82-2-2230-0701." },
+        { icon:"🏨", title:"Nine Tree by Parnas · Seoul", text:"Wed Oct 21, from 3 PM, to Fri Oct 23, by 12 PM. 28 Mareunnae-ro, Jung-gu, Seoul 04555. Free cancel until Oct 18, 12:01 AM Korea time. The hotel holds a deposit at check-in." },
+        { icon:"🏨", title:"W Osaka", text:"Fri Oct 23, from 3 PM, to Mon Oct 26, by 12 PM. 4-1-3 Minami Semba, Chuo-ku, Osaka 542-0081. Free cancel until Oct 21, midnight Japan time. Booked through Chase Travel: +1-855-234-2542." },
+        { icon:"🛂", title:"Airports", text:"Terminals come from web research. Check your boarding pass to be sure. Shanghai Pudong T1. Busan Gimhae International Terminal. Seoul Gimpo International Terminal. Osaka Kansai T2 on arrival, T1 for China Airlines. Taipei T2." },
+        { icon:"🎒", title:"Peach bags", text:"Seoul to Osaka has no free checked bag. Pack 2 cabin bags each, 15 lb per bag. You can also buy a checked bag on the Peach website." },
+        { icon:"🚄", title:"Train", text:"KTX 124, Wed Oct 21, 1:17 PM, for 2 people. Sign in at korail.com and open My Reservation to see the booking. Korail help line: +82-1599-7777." },
+        { icon:"🔒", title:"Booking codes", text:"Booking codes are not on this page. They are in the trip sheet and in Kevin’s email." }
+      ]}
+    };
+  }
+
+  chipStyle(k){
+    const base="display:inline-flex;align-items:center;gap:4px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:.005em;padding:5px 9px;border-radius:999px;border:1px solid;line-height:1;";
+    const m={
+      rez:"color:#2F5BD6;background:#EDF2FE;border-color:#D7E1FC;",
+      hours:"color:#6B6258;background:#FBF7F1;border-color:#E7DECF;",
+      warn:"color:#C2410C;background:#FEF1E7;border-color:#F6D6BF;",
+      good:"color:#2F8F3E;background:#ECF7EC;border-color:#CDE9CE;",
+      locked:"color:#8A6D1F;background:#FBF3DE;border-color:#EAD9A8;"
+    };
+    return base+(m[k]||m.hours);
+  }
+  chipIcon(k){ return ({rez:"💳",hours:"🕒",warn:"⚠️",good:"✓",locked:"🔒"})[k]||""; }
+
+  buildCard(a){
+    const cats=this.cats(), crew=this.crewData();
+    const cat=cats[a.cat]||cats.free;
+    const who=(a.who||[]).map((key,idx)=>{
+      const cr=crew[key]||{n:"?",c:"#999"};
+      return { i:cr.n[0], style:"width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:11px;color:#fff;border:2px solid #fff;background:"+cr.c+";"+(idx?"margin-left:-8px;":"") };
+    });
+    const whoLabel = (a.who||[]).length>1 ? "Kevin + Nicole" : "Kevin only";
+    return {
+      catColor:cat.c, catTint:cat.t, catLabel:cat.label, placeEmoji:a.emoji,
+      badgeStyle:"width:42px;height:42px;flex-shrink:0;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;background:"+cat.t+";border:1px solid "+cat.c+"33;",
+      title:a.title, hood:a.hood, addr:a.addr,
+      hasMap:!!a.maps, mapsHref:a.maps||"#",
+      desc:a.desc,
+      statusText:a.status,
+      statusStyle:"flex-shrink:0;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:"+cat.c+";background:"+cat.t+";border:1px solid "+cat.c+"33;border-radius:999px;padding:4px 9px;",
+      chips:(a.chips||[]).map(c=>({ icon:this.chipIcon(c.k), text:c.t, style:this.chipStyle(c.k) })),
+      who, whoLabel
+    };
+  }
+
+  renderVals(){
+    const s=this.state, props=this.props||{}, data=this.data(), cats=this.cats(), crew=this.crewData();
+    const dayId = s.day || props.startDay || "busan";
+    const cur = data[dayId] || data.busan;
+    const isInfo = cur.id==="info";
+
+    const crewChips = Object.keys(crew).map((key,idx)=>{
+      const cr=crew[key];
+      return { i:cr.n[0], heroStyle:"width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:13px;color:#fff;border:2px solid rgba(255,255,255,.85);background:"+cr.c+";box-shadow:0 2px 6px rgba(0,0,0,.2);"+(idx?"margin-left:-9px;":"") };
+    });
+
+    const tabDef=[["out","Out","10/9"],["busan","Busan","10/19"],["seoul","Seoul","10/21"],["osaka","Osaka","10/23"],["info","Info","stays"]];
+    const tabBase="flex:1;text-align:center;padding:9px 4px 9px;border-radius:13px 13px 0 0;cursor:pointer;border:none;border-bottom:3px solid transparent;background:none;transition:all .15s;";
+    const dayTabs=tabDef.map(t=>{
+      const active=t[0]===dayId;
+      return { label:t[1], sub:t[2],
+        style: tabBase+(active?"color:#1A1714;border-bottom-color:#FF5A3C;background:#FBF7F1;":"color:#A89E8E;border-bottom-color:transparent;background:none;"),
+        onSelect: ()=>{ this.setState({day:t[0]}); try{ window.scrollTo(0,0); }catch(e){} } };
+    });
+
+    let rows=[];
+    if(!isInfo){
+      cur.tl.forEach(item=>{
+        if(item.k==="head"){
+          rows.push({ isHead:true, isBuf:false, isAct:false, headDay:item.day, headSub:item.sub });
+        } else if(item.k==="act"){
+          const a=item.a, cat=cats[a.cat]||cats.free;
+          rows.push({ isHead:false, isBuf:false, isAct:true, time:item.time, nodeColor:cat.c, card:this.buildCard(a) });
+        }
+      });
+    }
+
+    return {
+      crew:crewChips, dayTabs,
+      isDay:!isInfo, isInfo,
+      dayTitle:cur.title, daySub:cur.sub||"",
+      rows, info:cur.info||[]
+    };
+  }
+}
+</script>
+</body>
+</html>
