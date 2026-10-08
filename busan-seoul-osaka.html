@@ -197,6 +197,7 @@ class Component extends DCLogic {
       train:{ c:"#FF5A3C", t:"#FF5A3C18", label:"Train" },
       stay: { c:"#7B5BFB", t:"#7B5BFB18", label:"Stay" },
       go:   { c:"#FF9F1C", t:"#FF9F1C1C", label:"Be there" },
+      tour: { c:"#9A52F2", t:"#9A52F218", label:"Tour" },
       free: { c:"#58B948", t:"#58B94818", label:"Free day" }
     };
   }
@@ -254,8 +255,12 @@ class Component extends DCLogic {
           gallery:{id:"voco",cap:"voco Seoul Myeongdong",files:["voco-1.webp","voco-2.webp","voco-3.webp","voco-4.webp"],alts:["Hotel front at night","Indoor pool","Lobby","Gym"]},
           chips:[{k:"hours",t:"Check-in from 3 PM"},{k:"locked",t:"Free cancel until Oct 20, 6 PM Korea time"},{k:"warn",t:"Ask about the 10% tax at check-in"},{k:"hours",t:"Hotel +82-2-6923-6700"}] } },
         { k:"head", day:"Thu Oct 22", sub:"Seoul" },
-        { k:"act", time:"All day", a:{ cat:"free", emoji:"🏙️", title:"Free day in Seoul", hood:"Seoul", addr:"", maps:"", status:"Open", who:KN,
-          desc:"Nothing booked. Plan this day on the spot.",
+        { k:"act", time:"9:20 AM", a:{ cat:"tour", emoji:"🧟", title:"Zombie Attack: Day tour", hood:"Seoul City Tour Bus", addr:"Ticket office, 68-2 Taepyeong-ro, Jung-gu", maps:M("Seoul City Tour Bus 68-2 Taepyeong-ro Jung-gu Seoul"), status:"Booked", who:KN,
+          desc:"Seoul City Tour Bus, Zombie Attack: Day. 2 adults. The bus leaves at 9:20 AM from the ticket office. The office is near the Gwanghwamun Station intersection, next to Dongwha Duty Free and Koreana Hotel.",
+          photo:{f:"zombie",ext:"png",cap:"Zombie Attack: Day",credit:"",pos:"50% 40%"},
+          chips:[{k:"hours",t:"Leaves 9:20 AM"},{k:"locked",t:"Booked under Nicole Choe"},{k:"hours",t:"Gwanghwamun Stn (Line 5), Exit 6: 100 m"},{k:"hours",t:"City Hall Stn (Lines 1 and 2), Exit 3: 300 m"}] } },
+        { k:"act", time:"After the tour", a:{ cat:"free", emoji:"🏙️", title:"Free time in Seoul", hood:"Seoul", addr:"", maps:"", status:"Open", who:KN,
+          desc:"Nothing else booked. Plan the rest of the day on the spot.",
           chips:[] } },
         { k:"head", day:"Fri Oct 23", sub:"Seoul → Osaka" },
         { k:"act", time:"By 12:00 PM", a:{ cat:"stay", emoji:"🧳", title:"Check out · voco Seoul Myeongdong", hood:"Myeongdong", addr:"52 Toegye-ro, Jung-gu", maps:M("voco Seoul Myeongdong 52 Toegye-ro"), status:"Check out", who:KN,
@@ -342,8 +347,8 @@ class Component extends DCLogic {
       gallery:a.gallery?a.gallery.files.map((f,i)=>({src:"trip-images/"+f, alt:a.gallery.alts[i]||a.gallery.cap})):[],
       onPrev:()=>{ try{ const el=document.getElementById("gal-"+(a.gallery&&a.gallery.id)); if(el) el.scrollBy({left:-el.clientWidth,behavior:"smooth"}); }catch(e){} },
       onNext:()=>{ try{ const el=document.getElementById("gal-"+(a.gallery&&a.gallery.id)); if(el) el.scrollBy({left:el.clientWidth,behavior:"smooth"}); }catch(e){} },
-      hasPhoto:!!a.photo, photoSrc:a.photo?("trip-images/"+a.photo.f+".jpg"):"", photoPos:a.photo?a.photo.pos:"50% 50%",
-      photoCredit:a.photo?(a.photo.cap+" · Photo: "+a.photo.credit+" · Wikimedia Commons"):"",
+      hasPhoto:!!a.photo, photoSrc:a.photo?("trip-images/"+a.photo.f+"."+(a.photo.ext||"jpg")):"", photoPos:a.photo?a.photo.pos:"50% 50%",
+      photoCredit:a.photo?(a.photo.credit?(a.photo.cap+" · Photo: "+a.photo.credit+" · Wikimedia Commons"):a.photo.cap):"",
       statusText:a.status,
       statusStyle:"flex-shrink:0;font-family:'Hanken Grotesk',sans-serif;font-weight:800;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:"+cat.c+";background:"+cat.t+";border:1px solid "+cat.c+"33;border-radius:999px;padding:4px 9px;",
       chips:(a.chips||[]).map(c=>({ icon:this.chipIcon(c.k), text:c.t, style:this.chipStyle(c.k) })),
